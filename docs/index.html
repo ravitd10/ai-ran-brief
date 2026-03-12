@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-RAN Standards Intelligence Brief — Ravit Dung</title>
+<style>
+  @page { margin: 0.6in 0.75in; size: letter; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #1a1a2e;
+    background: #f8f9fa;
+    line-height: 1.6;
+    font-size: 13.5px;
+  }
+  .container { max-width: 1060px; margin: 0 auto; padding: 20px; }
+
+  /* Header */
+  .report-header {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 40%, #76b900 100%);
+    color: white;
+    padding: 44px 50px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .report-header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+  }
+  .report-header .subtitle {
+    font-size: 15px;
+    color: #c8d6b0;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+  .report-header .meta {
+    font-size: 11.5px;
+    color: #a0a8b0;
+    line-height: 1.7;
+  }
+  .report-header .meta span { margin-right: 18px; }
+
+  /* Author bar */
+  .author-bar {
+    background: white;
+    border-radius: 6px;
+    padding: 18px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .author-bar .author-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+  .author-bar .author-detail {
+    font-size: 12px;
+    color: #64748b;
+  }
+  .author-bar .author-note {
+    font-size: 12px;
+    color: #64748b;
+    font-style: italic;
+    max-width: 480px;
+  }
+
+  /* Section */
+  .section {
+    background: white;
+    border-radius: 6px;
+    padding: 28px 34px;
+    margin-bottom: 22px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  .section h2 {
+    font-size: 17px;
+    color: #1a1a2e;
+    border-bottom: 2px solid #e8e8f0;
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+  }
+  .section h3 {
+    font-size: 14px;
+    color: #4a4a6a;
+    margin: 18px 0 10px 0;
+    font-weight: 700;
+  }
+  .section h4 {
+    font-size: 13px;
+    color: #555;
+    margin: 12px 0 6px 0;
+    font-weight: 600;
+  }
+  .section p { margin-bottom: 10px; }
+  .section ul, .section ol { margin: 6px 0 12px 22px; }
+  .section li { margin-bottom: 5px; }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 16px 0;
+    font-size: 12.5px;
+  }
+  th, td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e8e8f0;
+    vertical-align: top;
+  }
+  th {
+    background: #f0f0f8;
+    color: #302b63;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  tr:hover { background: #fafaff; }
+
+  /* Key finding */
+  .key-finding {
+    background: #f0fdf4;
+    border-left: 4px solid #16a34a;
+    padding: 14px 20px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .key-finding::before {
+    content: "KEY FINDING";
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    color: #15803d;
+    letter-spacing: 0.8px;
+    margin-bottom: 4px;
+  }
+
+  /* Implication */
+  .implication {
+    background: #eff6ff;
+    border-left: 4px solid #2563eb;
+    padding: 14px 20px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .implication::before {
+    content: "AERIAL IMPLICATION";
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    color: #1d4ed8;
+    letter-spacing: 0.8px;
+    margin-bottom: 4px;
+  }
+
+  /* Action item */
+  .action-item {
+    background: #fefce8;
+    border-left: 4px solid #ca8a04;
+    padding: 14px 20px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .action-item::before {
+    content: "RECOMMENDED ACTION";
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    color: #a16207;
+    letter-spacing: 0.8px;
+    margin-bottom: 4px;
+  }
+
+  /* Exec summary bullets */
+  .exec-bullets { list-style: none; padding: 0; }
+  .exec-bullets li {
+    padding: 10px 14px 10px 30px;
+    position: relative;
+    margin-bottom: 6px;
+    background: #f8f9ff;
+    border-radius: 4px;
+    border-left: 3px solid #302b63;
+  }
+  .exec-bullets li::before {
+    content: "▸";
+    position: absolute;
+    left: 12px;
+    color: #302b63;
+    font-weight: bold;
+  }
+
+  /* Badge */
+  .badge-nokia {
+    display: inline-block;
+    background: #dbeafe;
+    color: #1d4ed8;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .badge-ericsson {
+    display: inline-block;
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .badge-nvidia {
+    display: inline-block;
+    background: #ecfccb;
+    color: #4d7c0f;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  /* Strategy boxes */
+  .partner-box {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 12px 0;
+  }
+  .partner-box.nokia { border-left: 4px solid #1d4ed8; }
+  .partner-box.ericsson { border-left: 4px solid #dc2626; }
+  .partner-box h4 { margin: 0 0 8px 0; }
+
+  /* Diagram */
+  .diagram-box {
+    background: #1e1e2e;
+    color: #a6e3a1;
+    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    font-size: 11.5px;
+    padding: 20px 24px;
+    border-radius: 6px;
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.4;
+    margin: 12px 0;
+  }
+
+  /* Two col layout */
+  .two-col { display: flex; gap: 20px; flex-wrap: wrap; }
+  .two-col > div { flex: 1; min-width: 280px; }
+
+  /* Bottom line */
+  .bottom-line {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 60%, #76b900 100%);
+    color: white;
+    border-radius: 6px;
+    padding: 28px 34px;
+    margin-bottom: 22px;
+  }
+  .bottom-line h2 {
+    font-size: 17px;
+    color: #76b900;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+  .bottom-line p {
+    color: #d1d5db;
+    margin-bottom: 10px;
+  }
+  .bottom-line strong { color: white; }
+
+  /* Print */
+  @media print {
+    body {
+      background: white !important;
+      font-size: 11px;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    .container { padding: 0; max-width: 100%; }
+
+    /* Header */
+    .report-header {
+      border-radius: 0;
+      padding: 28px 30px;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    .report-header h1 { font-size: 19px; }
+
+    /* Author bar */
+    .author-bar { box-shadow: none; border: 1px solid #d0d0d0; page-break-after: avoid; }
+
+    /* Sections */
+    .section {
+      box-shadow: none;
+      border: 1px solid #d0d0d0;
+      padding: 18px 22px;
+      margin-bottom: 14px;
+      page-break-inside: auto;
+    }
+    .section h2 { font-size: 14px; margin-bottom: 12px; }
+    .section h3 { font-size: 12.5px; margin: 14px 0 8px 0; }
+
+    /* Page break control */
+    .key-finding, .implication, .action-item,
+    .partner-box, .position-card, .turning-point,
+    .recommendation, .alliance-context { page-break-inside: avoid; }
+    h2, h3, h4 { page-break-after: avoid; }
+
+    /* Tables: repeat headers, don't split rows */
+    table { page-break-inside: auto; font-size: 10.5px; }
+    thead { display: table-header-group; }
+    tr { page-break-inside: avoid; page-break-after: auto; }
+    th, td { padding: 4px 7px; }
+
+    /* Force all backgrounds to print */
+    .key-finding, .implication, .action-item,
+    .partner-box, .position-card, .turning-point,
+    .recommendation, .exec-bullets li, .how-to-use,
+    .quick-ref, .bottom-line, .diagram-box,
+    .badge-nokia, .badge-ericsson, .badge-nvidia,
+    .jd-quote, th, .alliance-context {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* Tighten spacing */
+    .exec-bullets li { padding: 5px 10px 5px 24px; margin-bottom: 2px; font-size: 11px; }
+    .diagram-box { font-size: 9.5px; padding: 12px 14px; }
+    .quick-ref { padding: 16px 20px; page-break-inside: avoid; }
+    .bottom-line { padding: 18px 22px; page-break-inside: avoid; }
+    .talking-point, .advocate-quote { font-size: 11px; }
+
+    /* Prevent orphaned headers */
+    .section h3 + table,
+    .section h3 + .partner-box,
+    .section h3 + .turning-point,
+    .section h3 + .position-card,
+    .section h3 + .recommendation,
+    .section h3 + p { page-break-before: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="report-header">
+  <h1>3GPP Rel-19 AI/ML for NR Air Interface</h1>
+  <div class="subtitle">Standards Intelligence Brief &mdash; Implications for NVIDIA Aerial and NEP Partner Engagement</div>
+  <div class="meta">
+    <span>Source: RAN1 Session Notes, Meetings #116&ndash;#120 (Feb 2024 &ndash; Feb 2025)</span><br>
+    <span>9 documents analyzed &bull; 237 formal decisions extracted &bull; Nokia &amp; Ericsson positions mapped</span>
+  </div>
+</div>
+
+<!-- AUTHOR BAR -->
+<div class="author-bar">
+  <div>
+    <div class="author-name">Ravit Dung</div>
+    <div class="author-detail">ravit.rd11@gmail.com &bull; Dallas, TX &bull; March 2026</div>
+  </div>
+  <div class="author-note">
+    I built this brief to demonstrate how I'd approach the DevGAM role &mdash; starting from the 3GPP source material, mapping it against Aerial's SDK capabilities, and extracting the partner-specific intelligence needed to operate as PIC for Nokia and Ericsson.
+  </div>
+</div>
+
+<!-- ===== 1. EXECUTIVE SUMMARY ===== -->
+<div class="section">
+  <h2>1. Executive Summary</h2>
+
+  <p>I analyzed the complete set of RAN1 session notes for agenda item 9.1 (AI/ML for NR Air Interface) across seven consecutive meetings, from #116 (Athens, Feb 2024) through #120 (Athens, Feb 2025). The analysis extracted every formal decision (agreement, conclusion, working assumption) and tracked Nokia and Ericsson's contributions, positions, and procedural roles throughout.</p>
+
+  <ul class="exec-bullets">
+    <li><strong>237 formal decisions</strong> were reached across 7 sessions. Beam management leads in consensus maturity and is the most ready for production reference builds on Aerial today.</li>
+    <li><strong>CSI prediction moved to specification support</strong> at RAN1 #120 (Feb 2025), with formal agreements now being made on framework reuse and resource types. Ericsson's multi-step prediction results (N4=4) are the strongest in the field and create the strongest compute case for GPU acceleration.</li>
+    <li><strong>CSI compression converged on a Transformer backbone</strong> for Case 0 at #119, but three inter-vendor collaboration directions (A, B, C) remain open. <strong>Direction C would constrain every GPU implementation to a specific model architecture</strong> &mdash; this is the single highest-stakes open decision for Aerial's product roadmap.</li>
+    <li><strong>Ericsson controls the positioning specification</strong> as moderator for agenda 9.1.2 across all 7 meetings. Any GPU-accelerated positioning implementation must track Ericsson's moderator summaries, as they define the exact spec text.</li>
+    <li><strong>Nokia participates broadly but drives no sub-agenda.</strong> Nokia's differentiated approach &mdash; vehicular-focused evaluation assumptions, two-sided model emphasis &mdash; means they need a fundamentally different Aerial value proposition than Ericsson.</li>
+    <li><strong>The RRC parameter surface</strong> defined in R1-2501143 (Qualcomm rapporteur document) maps directly to Aerial's pipeline: CSI-ReportConfig extensions &rarr; cuPHY, Associated ID &rarr; cuPHY-CP, OtherConfig &rarr; CU on Grace, LPP extensions &rarr; positioning NIM.</li>
+  </ul>
+</div>
+
+<!-- ===== 2. THE PARTNER INTELLIGENCE ===== -->
+<div class="section">
+  <h2>2. What Nokia and Ericsson Need from Aerial &mdash; And Why It's Different</h2>
+
+  <p>The most actionable insight from the 3GPP analysis is that these two partners need fundamentally different things from the same GPU platform. A single PIC approach won't work.</p>
+
+  <table>
+    <thead>
+      <tr><th>Dimension</th><th><span class="badge-nokia">Nokia</span></th><th><span class="badge-ericsson">Ericsson</span></th></tr>
+    </thead>
+    <tbody>
+      <tr><td>3GPP moderator roles (AI 9.1)</td><td>None</td><td>Positioning &mdash; all 7 meetings</td></tr>
+      <tr><td>Standards posture</td><td>Broad participant, follows consensus</td><td>Agenda driver (positioning), evaluation leader (CSI prediction)</td></tr>
+      <tr><td>CSI prediction approach</td><td>Antenna(port)-delay domain, 100% in-car UE distribution</td><td>Beam-delay domain, 100% outdoor + spatial consistency</td></tr>
+      <tr><td>Speed generalization (30&rarr;60 km/h)</td><td>In the group observing -33.6% to -19% degradation (with CMCC, LG, ZTE)</td><td>In the group observing -11.4% to -2.7% degradation (with Huawei, CATT, vivo)</td></tr>
+      <tr><td>Multi-step prediction (N4=4)</td><td>Not prominently featured</td><td>Heavily featured, strongest advocate</td></tr>
+      <tr><td>Two-sided model focus</td><td>Yes (paper titles indicate priority)</td><td>Not specifically emphasized</td></tr>
+      <tr><td>Target deployment scenario</td><td>Vehicular / mobility-focused</td><td>General outdoor, dense urban</td></tr>
+      <tr><td>Evaluation result volume</td><td>Moderate, selective scenarios</td><td>Highest among all companies in 3GPP</td></tr>
+    </tbody>
+  </table>
+
+  <div class="partner-box nokia">
+    <h4 style="color:#1d4ed8;">Nokia: The Flexibility Play</h4>
+    <p>Nokia's 3GPP positioning tells a clear story: they're targeting diverse, mobility-heavy deployment scenarios (vehicular, in-car) and investing in two-sided models (CSI compression). This maps to a PIC strategy centered on:</p>
+    <ul>
+      <li><strong>ARC as a single-box edge platform</strong> &mdash; one GH200 at the cell site running cuPHY + cuMAC + NIM for D-RAN/C-RAN deployments where the DU is close to the road</li>
+      <li><strong>Aerial Framework flexibility</strong> &mdash; Nokia's antenna-port-delay domain approach is unique among all 3GPP contributors; they need the Aerial Framework's open pipeline generation to implement their specific models</li>
+      <li><strong>CSI compression Direction A/B/C tracking</strong> &mdash; Nokia's two-sided model focus makes the direction down-selection existential for their Aerial integration path</li>
+      <li><strong>Live engagement</strong>: Nokia + T-Mobile field validation trials expected in 2026</li>
+    </ul>
+  </div>
+
+  <div class="partner-box ericsson">
+    <h4 style="color:#dc2626;">Ericsson: The Compute Density Play</h4>
+    <p>Ericsson's 3GPP positioning tells a different story: they control the positioning specification, dominate CSI prediction evaluation results, and push for compute-intensive multi-step prediction. This maps to:</p>
+    <ul>
+      <li><strong>ARC as a compute-dense C-RAN/Cloud-RAN platform</strong> &mdash; Ericsson's N4=4 multi-step prediction significantly increases inference demand vs N4=1 (multiple prediction steps per reporting interval); CPU-based L1 can't keep up</li>
+      <li><strong>Positioning pipeline alignment</strong> &mdash; Ericsson's moderator summaries define the exact measurement formats (sample-based, Nt' from Nt consecutive samples, T=2<sup>k</sup>&times;T<sub>c</sub> granularity); cuPHY must ingest these natively</li>
+      <li><strong>pyAerial benchmarking</strong> &mdash; Ericsson's evaluation results are the most comprehensive in 3GPP; they'll want to reproduce them on GPU to validate Aerial's performance claims</li>
+      <li><strong>Commercial context</strong>: Ericsson is an AI-RAN Alliance member; SoftBank (Ericsson RAN customer) planning commercial AI-RAN deployment in 2026</li>
+    </ul>
+  </div>
+
+  <div class="key-finding">
+    Same GPU platform, two different value propositions. The PIC for each partner needs to lead with the right story: <strong>flexibility</strong> for Nokia, <strong>compute density</strong> for Ericsson. The 3GPP record makes this concrete, not speculative.
+  </div>
+</div>
+
+<!-- ===== 3. THE THREE DECISIONS THAT MATTER MOST ===== -->
+<div class="section">
+  <h2>3. Three Open Standards Decisions That Will Shape Aerial's Roadmap</h2>
+
+  <p>Of the many open items across 5 AI/ML use cases, three decisions have outsized impact on how Aerial needs to evolve. These are the items I'd track as PIC and brief the cross-functional team on quarterly.</p>
+
+  <h3>Decision 1: CSI Compression Direction Down-Selection</h3>
+  <p><strong>What's at stake:</strong> Three surviving directions for inter-vendor collaboration in CSI compression:</p>
+
+  <table>
+    <thead><tr><th>Direction</th><th>Mechanism</th><th>Impact on Aerial</th></tr></thead>
+    <tbody>
+      <tr><td><strong>A</strong> (Options 3a-1, 4-1)</td><td>Offline parameter/dataset exchange between vendors</td><td>Aerial preserves full flexibility &mdash; vendors keep proprietary models, exchange parameters offline</td></tr>
+      <tr><td><strong>B</strong></td><td>Direct parameter transfer to UE over air interface</td><td>Moderate constraint &mdash; Aerial must support parameter encoding/transfer but model architecture remains flexible</td></tr>
+      <tr><td><strong>C</strong></td><td>Fully standardized reference model</td><td><strong>Maximum constraint</strong> &mdash; the Transformer backbone agreed at #119 becomes mandatory; every GPU implementation must run exactly that model</td></tr>
+    </tbody>
+  </table>
+
+  <div class="implication">
+    If Direction C wins, cuPHY needs a TensorRT-integrated inference stage that can load and execute a standardized Transformer model as a first-class pipeline component. This is not a sidecar &mdash; it's core L1 functionality. If Direction A wins, the Aerial Framework's open pipeline generation becomes the competitive advantage. The down-selection will likely happen in the next 2&ndash;3 RAN1 meetings.
+  </div>
+
+  <h3>Decision 2: CSI Processing Timeline for AI/ML</h3>
+  <p><strong>What's at stake:</strong> The CSI processing timeline for BM-Case1 and BM-Case2 is still open. This determines how much latency budget exists for AI inference within the L1 processing window.</p>
+
+  <div class="implication">
+    This is where GPU parallel processing becomes the differentiator. A tight timeline favors GPU (more complex models in the same time budget via parallelism) over CPU. NVIDIA's interest is in a timeline that accommodates AI inference without forcing a choice between model complexity and latency. Both Nokia (needs complex models to compensate for generalization gaps) and Ericsson (needs time for multi-step prediction) would benefit from a generous timeline.
+  </div>
+
+  <h3>Decision 3: Model Transfer Scalability (Case z4)</h3>
+  <p><strong>What's at stake:</strong> Case z4 (known model structure + parameter transfer OTA) is the surviving model transfer mechanism. How model parameters are encoded and how the UE signals readiness directly impacts GPU-accelerated model lifecycle management.</p>
+
+  <div class="implication">
+    The ARC platform can manage model lifecycle (training, compression, transfer) as a containerized NIM function. But the standard needs to define parameter encoding formats that scale across antenna configurations and bandwidths without creating air interface bottlenecks. This is a topic where NVIDIA has a legitimate technical voice in 3GPP-adjacent discussions.
+  </div>
+</div>
+
+<!-- ===== 4. THE INTEGRATION SURFACE ===== -->
+<div class="section">
+  <h2>4. Where Aerial Touches the Standard: The RRC Parameter Integration Map</h2>
+
+  <p>The RRC parameters defined in R1-2501143 (Qualcomm rapporteur, RAN1 #120) are the exact control plane interface that an AI-RAN DU must implement. Here's how they map to Aerial's pipeline:</p>
+
+  <table>
+    <thead>
+      <tr><th>3GPP Mechanism</th><th>Purpose</th><th><span class="badge-nvidia">Aerial</span> Component</th><th>Integration Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>CSI-ReportConfig</strong> extensions</td><td>AI/ML inference configuration (Set A/B, monitoring, associated ID)</td><td>cuPHY L1</td><td>CSI-RS pipeline must generate Set A/Set B measurements and route to AI inference</td></tr>
+      <tr><td><strong>Associated ID</strong></td><td>Training/inference consistency bridge</td><td>cuPHY-CP + L2</td><td>New lifecycle concept: spans training data collection through inference and monitoring</td></tr>
+      <tr><td><strong>nrofReportedRS-v19</strong></td><td>Expanded beam report (&gt;4 beams)</td><td>cuPHY L1</td><td>PUSCH pipeline must decode expanded reports</td></tr>
+      <tr><td><strong>OtherConfig</strong></td><td>Enable/disable UAI reporting</td><td>CU (Grace CPU)</td><td>RRC stack signals AI/ML activation</td></tr>
+      <tr><td><strong>Applicability Report</strong> (Step 4)</td><td>UE reports which AI/ML configs apply</td><td>L2 + cuPHY</td><td>New procedure for UE capability exchange</td></tr>
+      <tr><td><strong>L1/MAC signaling</strong></td><td>Activate/deactivate CSI reports</td><td>cuMAC L2</td><td>Existing CSI activation, extended for AI/ML</td></tr>
+      <tr><td><strong>LPP extensions</strong></td><td>Positioning assistance data</td><td>CU + Positioning NIM</td><td>LMF function as NIM on ARC</td></tr>
+      <tr><td><strong>NRPPa</strong></td><td>LMF &harr; gNB positioning params</td><td>CU</td><td>Existing protocol</td></tr>
+      <tr><td><strong>Model Transfer (z4)</strong></td><td>Known model structure + parameter OTA</td><td>CU (PDCP/RRC)</td><td>New mechanism, details FFS</td></tr>
+    </tbody>
+  </table>
+
+  <div class="key-finding">
+    The standard creates a clean separation: <strong>interfaces are standardized, model architecture is implementation-specific</strong> (for NW-sided and UE-sided models). This is where GPU acceleration lives &mdash; behind a standards-compliant signaling interface, running whatever model the operator chooses. The exception is CSI compression (two-sided models), where the Transformer backbone is being standardized, potentially constraining all implementations.
+  </div>
+
+  <h3>Beam Management RRC Parameters (Most Mature)</h3>
+  <table>
+    <thead><tr><th>Parameter</th><th>Type</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>AIML_BM_Case1 / Case2 support</td><td>UE Feature (capability)</td><td>Agreed</td></tr>
+      <tr><td>{Set A, Set B} combination values</td><td>UE Feature (per case)</td><td>Agreed</td></tr>
+      <tr><td>BM AI/ML Processing capability</td><td>UE Feature (compute budget)</td><td>Agreed</td></tr>
+      <tr><td>AIML_BM_SetA / AIML_BM_SetB</td><td>RRC (CSI-ReportConfig)</td><td>Agreed &mdash; enumerated lists with max sizes</td></tr>
+      <tr><td>Enable/Disable per case</td><td>RRC (single bit)</td><td>Agreed</td></tr>
+      <tr><td>Associated_Inference_Report_ID</td><td>RRC (Monitoring)</td><td>Agreed &mdash; links monitoring to inference</td></tr>
+      <tr><td>L1MetricforMonitoring</td><td>RRC (Monitoring)</td><td>Agreed</td></tr>
+      <tr><td>nrofReportedRS-v19</td><td>RRC</td><td>Agreed</td></tr>
+      <tr><td>RSRP quantization</td><td>L1</td><td>Agreed &mdash; 7-bit [-140, -44] dBm, 1dB step</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px; color:#666;">Beam management has the most agreed parameters of any AI/ML use case. A reference build on Aerial can be started against these specifications today.</p>
+</div>
+
+<!-- ===== 5. REFERENCE BUILD READINESS ===== -->
+<div class="section">
+  <h2>5. Reference Build Readiness by Use Case</h2>
+
+  <p>If I were in the DevGAM role, I'd prioritize reference builds and PoCs by standards maturity. Building against unstable specifications wastes partner engineering time and erodes credibility.</p>
+
+  <table>
+    <thead><tr><th>Use Case</th><th>Standards Maturity</th><th>Reference Build Status</th><th>Aerial Toolchain Path</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Beam Management</strong></td>
+        <td style="color:#16a34a; font-weight:700;">Ready</td>
+        <td>RRC parameters agreed. CSI-ReportConfig extensions defined. Production reference build feasible now.</td>
+        <td>cuPHY (CSI-RS pipeline) + cuMAC (scheduler feedback) + pyAerial (prototyping)</td>
+      </tr>
+      <tr>
+        <td><strong>Positioning</strong></td>
+        <td style="color:#ca8a04; font-weight:700;">Mostly Ready</td>
+        <td>Measurement formats agreed but some items pending (Case 1 info #7 has 4 alternatives). Must track Ericsson moderator summaries.</td>
+        <td>cuPHY (PRS/SRS processing) + Positioning NIM (inference) + Sionna (validation)</td>
+      </tr>
+      <tr>
+        <td><strong>CSI Prediction</strong></td>
+        <td style="color:#dc2626; font-weight:700;">Too Early</td>
+        <td>Normative work just started Feb 2025. No RRC parameters listed yet. Prototype only.</td>
+        <td>pyAerial + Sionna (prototype guide with 3GPP evaluation assumptions)</td>
+      </tr>
+      <tr>
+        <td><strong>CSI Compression</strong></td>
+        <td style="color:#dc2626; font-weight:700;">Blocked</td>
+        <td>Direction A/B/C down-selection pending. Cannot write definitive build until direction chosen.</td>
+        <td>Three-path integration guide covering all directions; prototype Direction C (Transformer) on pyAerial</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>The Developer-to-Deployment Path on Aerial</h3>
+
+  <div class="diagram-box">DEVELOPER PHASE                       DEPLOYMENT PHASE
++------------------------+            +------------------------+
+| pyAerial               |            | cuBB                   |
+| Python + bit-accurate  |  validate  | cuPHY (L1) + cuMAC (L2)|
+| CUDA kernels           | ---------> | Production pipeline    |
++------------------------+            +------------------------+
+| Sionna                 |            | ARC                    |
+| Channel sim + ray      |  benchmark | GH200 + BlueField-3   |
+| tracing (3GPP TR38.843)| ---------> | O-RAN 7.2 fronthaul   |
++------------------------+            +------------------------+
+| Aerial Framework       |            | Docker containers      |
+| Pipeline generation    |  package   | cuBB + L2+ + CU +     |
+| from Python (Apache 2) | ---------> | UPF + NIM + RIC       |
++------------------------+            +------------------------+</div>
+
+  <div class="action-item">
+    <strong>First PoC I'd build:</strong> A beam management reference implementation on pyAerial that demonstrates GPU-accelerated NW-sided beam prediction using the agreed CSI-ReportConfig extensions (Set A/Set B, associated ID, monitoring report). This is the lowest-risk, highest-credibility starting point &mdash; the spec is stable, the Aerial pipeline already processes CSI-RS, and the result is immediately demonstrable to both Nokia and Ericsson.
+  </div>
+</div>
+
+<!-- ===== 6. PRODUCT STRATEGY INPUTS ===== -->
+<div class="section">
+  <h2>6. Five Inputs I'd Bring to the Aerial Product Team</h2>
+
+  <p>The DevGAM role sits at the intersection of partner engineering and NVIDIA product teams. Here are five observations from the 3GPP analysis that I'd escalate as product strategy inputs:</p>
+
+  <div class="action-item">
+    <strong>1. cuPHY needs a standardized model inference path.</strong> If CSI compression Direction C wins, the Transformer backbone becomes mandatory. cuPHY needs a TensorRT-integrated inference stage &mdash; not a sidecar, a first-class pipeline component. Timeline: ready before Rel-19 freeze.
+  </div>
+
+  <div class="action-item">
+    <strong>2. pyAerial/Sionna should ship with 3GPP evaluation profiles.</strong> The 3GPP evaluation framework specifies exact conditions (30/60 km/h, 5/20ms CSI-RS periodicity, indoor/outdoor distributions). Pre-configured profiles matching TR 38.843 would let NEP engineers validate AI models against 3GPP assumptions in one line of Python. This is a low-cost, high-differentiation feature.
+  </div>
+
+  <div class="action-item">
+    <strong>3. A Positioning NIM is the cleanest new NIM opportunity.</strong> AI/ML positioning is a well-defined inference problem: 3GPP-formatted measurements in, position estimate out. The measurement formats are nearly finalized (Ericsson has been driving them as moderator). Package LMF as a NIM on ARC.
+  </div>
+
+  <div class="action-item">
+    <strong>4. Associated ID needs lifecycle management in the SDK.</strong> The Associated ID mechanism bridges training and inference across all use cases. It's not a simple parameter &mdash; it's a lifecycle spanning data collection, training, inference configuration, and performance monitoring. This needs first-class support in cuPHY-CP and the L2 stack.
+  </div>
+
+  <div class="action-item">
+    <strong>5. NEPs need a "what's standardized vs. what's yours" map.</strong> The biggest adoption barrier I'd anticipate is confusion about where 3GPP's interface specification ends and Aerial's implementation freedom begins. A clear mapping document per use case becomes the foundation of every PIC engagement. Aerial's value proposition is clearest in the implementation-specific zone.
+  </div>
+</div>
+
+<!-- ===== 7. CROSS-FUNCTIONAL COORDINATION ===== -->
+<div class="section">
+  <h2>7. How I'd Coordinate the NVIDIA Team Around These Insights</h2>
+
+  <p>Executing on these insights requires coordinating Solutions Architects, Engineering, Product Management, and Industry BD around concrete milestones. Here's how I'd organize the team against the 3GPP calendar:</p>
+
+  <h3>Milestone 1: CSI Compression Direction Down-Selection (Next 2&ndash;3 RAN1 Meetings)</h3>
+  <table>
+    <thead><tr><th>Function</th><th>Role</th><th>Deliverable</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Solutions Architect</strong></td><td>Model Direction A/B/C GPU impact per partner</td><td>Architecture decision document</td></tr>
+      <tr><td><strong>Engineering</strong></td><td>Prototype Transformer inference in cuPHY (Direction C hedge)</td><td>Working cuPHY + TensorRT build</td></tr>
+      <tr><td><strong>Product Management</strong></td><td>Track RAN1 sessions for down-selection signals</td><td>Standards watch brief per meeting</td></tr>
+      <tr><td><strong>Industry BD</strong></td><td>Gather Nokia/Ericsson standards delegate positions</td><td>Partner preference intelligence</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Milestone 2: CSI Prediction Normative Spec Development (Ongoing from Feb 2025)</h3>
+  <table>
+    <thead><tr><th>Function</th><th>Role</th><th>Deliverable</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Solutions Architect</strong></td><td>Map Ericsson's N4=4 compute requirements to ARC sizing</td><td>ARC sizing guide</td></tr>
+      <tr><td><strong>Engineering</strong></td><td>Build CSI prediction inference pipeline in pyAerial</td><td>Prototype + cuBB integration plan</td></tr>
+      <tr><td><strong>Product Management</strong></td><td>Decide: NIM or cuPHY-native function?</td><td>Product positioning decision</td></tr>
+      <tr><td><strong>Industry BD</strong></td><td>Coordinate with Ericsson on combined deployment scope</td><td>Joint roadmap</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Milestone 3: Rel-19 Feature Freeze &amp; Commercial Deployment (2026)</h3>
+  <table>
+    <thead><tr><th>Function</th><th>Role</th><th>Deliverable</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Solutions Architect</strong></td><td>Final reference architecture per partner</td><td>Nokia (D-RAN/C-RAN) and Ericsson (Cloud-RAN) reference docs</td></tr>
+      <tr><td><strong>Engineering</strong></td><td>Production cuBB release with Rel-19 AI/ML features</td><td>Release candidate</td></tr>
+      <tr><td><strong>Product Management</strong></td><td>GTM strategy for AI-RAN platform</td><td>Launch plan</td></tr>
+      <tr><td><strong>Industry BD</strong></td><td>Commercial terms for SoftBank, T-Mobile deployments</td><td>Commercial agreements</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== 8. INDUSTRY ADVOCACY ===== -->
+<div class="section">
+  <h2>8. Positions I'd Advocate in the AI-RAN Alliance and 3GPP Context</h2>
+
+  <p>Three positions I'd advocate in the AI-RAN Alliance and 3GPP-adjacent forums, each grounded in specific 3GPP evidence:</p>
+
+  <h3>Position 1: "The Standard Creates a GPU-Shaped Opportunity"</h3>
+  <p>3GPP standardizes the <em>measurement interfaces</em> and <em>signaling procedures</em> but explicitly leaves model architecture as implementation-specific for NW-sided and UE-sided models. The gNB decides what AI to run. This is where GPU acceleration has maximum impact: behind a standards-compliant interface, running models that are too compute-intensive for CPU-based L1.</p>
+  <p>The evidence is specific: Ericsson's N4=4 multi-step CSI prediction &mdash; the strongest results in 3GPP &mdash; substantially increases inference demand by requiring multiple prediction steps per reporting interval. NW-sided positioning inference across Cases 3a/3b runs on the gNB. These aren't hypothetical GPU workloads; they're what the standard is specifying right now.</p>
+
+  <h3>Position 2: "Processing Timelines Should Accommodate AI Inference"</h3>
+  <p>The CSI processing timeline for AI/ML is still open in 3GPP. NVIDIA's interest is in a timeline that doesn't force a trade-off between model complexity and latency. Both Nokia (higher generalization degradation means more complex compensating models) and Ericsson (multi-step prediction needs inference time) align with this position.</p>
+
+  <h3>Position 3: "Model Transfer Must Scale for Commercial Deployment"</h3>
+  <p>Case z4 parameter transfer needs efficient encoding formats that scale across antenna configurations and bandwidths. ARC can manage model lifecycle as a NIM, but the standard's parameter format determines whether this scales or bottlenecks the air interface.</p>
+
+  <h3>Context: NVIDIA's Current Alliance Positions</h3>
+  <ul>
+    <li><strong>AI-RAN Alliance:</strong> 130+ members including Nokia, Ericsson, T-Mobile, SoftBank</li>
+    <li><strong>All-American AI-RAN Stack</strong> (Oct 2025): NVIDIA + Booz Allen + Cisco + T-Mobile + MITRE + ODC</li>
+    <li><strong>Nokia partnership:</strong> AI platform for 6G, backed by $1B NVIDIA investment in Nokia; field validation with T-Mobile in 2026</li>
+    <li><strong>SoftBank:</strong> Commercial AI-RAN deployment planned for 2026</li>
+    <li><strong>Open source:</strong> Aerial SDK and Framework on GitHub under Apache 2.0 (March 2026)</li>
+  </ul>
+</div>
+
+<!-- ===== BOTTOM LINE ===== -->
+<div class="bottom-line">
+  <h2>Bottom Line</h2>
+  <p>The 3GPP Rel-19 AI/ML specification is creating a set of standardized interfaces that wrap implementation-specific AI &mdash; and the compute requirements being specified (multi-step prediction, NW-sided positioning, two-sided model inference) point directly at GPU acceleration.</p>
+  <p>The DevGAM for this space needs to <strong>read the standard, understand the partner positions, map them to the SDK, and build the PoCs that make it real</strong>. That's what this brief is &mdash; a demonstration that I already think this way.</p>
+  <p><strong>The brief itself was built using a custom Python tool I wrote</strong> that ingests 3GPP RAN1 session note PDFs, extracts formal decisions, tracks company contributions, and maps them against Aerial's pipeline. The tool, the analysis, and this document are all available for review.</p>
+</div>
+
+<!-- ===== APPENDIX ===== -->
+<div class="section">
+  <h2>Appendix: Methodology and Sources</h2>
+
+  <h3>Documents Analyzed</h3>
+  <table>
+    <thead><tr><th>Document</th><th>Meeting</th><th>Date</th><th>Location</th><th>Type</th></tr></thead>
+    <tbody>
+      <tr><td>R1-2401430</td><td>RAN1 #116</td><td>Feb 2024</td><td>Athens, Greece</td><td>Work plan (Qualcomm rapporteur)</td></tr>
+      <tr><td>R1-2401766</td><td>RAN1 #116</td><td>Feb 2024</td><td>Athens, Greece</td><td>Session notes (AI 9.1)</td></tr>
+      <tr><td>R1-2403662</td><td>RAN1 #116bis</td><td>Apr 2024</td><td>Changsha, China</td><td>Session notes (AI 9.1)</td></tr>
+      <tr><td>R1-2405695</td><td>RAN1 #117</td><td>May 2024</td><td>Fukuoka, Japan</td><td>Session notes (AI 9.1)</td></tr>
+      <tr><td>R1-2407478</td><td>RAN1 #118</td><td>Aug 2024</td><td>Maastricht, NL</td><td>Session notes (AI 9.1)</td></tr>
+      <tr><td>R1-2409222</td><td>RAN1 #118bis</td><td>Oct 2024</td><td>Hefei, China</td><td>Session notes (AI 9.1)</td></tr>
+      <tr><td>R1-2410844</td><td>RAN1 #119</td><td>Nov 2024</td><td>Orlando, US</td><td>Session notes (AI 9.1)</td></tr>
+      <tr><td>R1-2501143</td><td>RAN1 #120</td><td>Feb 2025</td><td>Athens, Greece</td><td>RRC parameters (Qualcomm rapporteur)</td></tr>
+      <tr><td>R1-2501546</td><td>RAN1 #120</td><td>Feb 2025</td><td>Athens, Greece</td><td>Session notes (AI 9.1)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Methodology</h3>
+  <ul>
+    <li>Positions are attributed to Nokia and Ericsson only where they are explicitly named in the documents.</li>
+    <li>Where a company is not mentioned on a topic, this is noted &mdash; no positions have been inferred.</li>
+    <li>NVIDIA Aerial SDK capabilities are sourced from public documentation at docs.nvidia.com/aerial/ and developer.nvidia.com.</li>
+    <li>The extraction tool (Python, ~1000 lines) parses session note markdown, identifies agenda sections, and classifies formal decisions by type and use case. Source code available on request.</li>
+  </ul>
+
+  <h3>SDK Sources</h3>
+  <ul style="font-size:12px; color:#666;">
+    <li>NVIDIA Aerial CUDA-Accelerated RAN: docs.nvidia.com/aerial/cuda-accelerated-ran/latest/</li>
+    <li>cuPHY Components: docs.nvidia.com/aerial/.../cuphy_components.html</li>
+    <li>cuMAC: docs.nvidia.com/aerial/.../cumac/</li>
+    <li>pyAerial: docs.nvidia.com/aerial/cuda-accelerated-ran/25-2/pyaerial/</li>
+    <li>Aerial Framework: github.com/NVIDIA/aerial-framework</li>
+    <li>NIM for Telecom: nvidia.com/en-us/ai/nim-for-telco/</li>
+    <li>AI-RAN Solutions: nvidia.com/en-us/industries/telecommunications/ai-ran/</li>
+  </ul>
+</div>
+
+<!-- FOOTER -->
+<div style="text-align:center; padding:24px; font-size:11px; color:#999;">
+  Prepared by Ravit Dung &bull; ravit.rd11@gmail.com &bull; Dallas, TX &bull; March 2026
+</div>
+
+</div>
+</body>
+</html>
