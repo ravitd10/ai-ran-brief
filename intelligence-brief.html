@@ -1,0 +1,2866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-RAN Standards Intelligence Brief</title>
+<style>
+  @page { margin: 0.75in; size: letter; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #1a1a2e;
+    background: #f8f9fa;
+    line-height: 1.55;
+    font-size: 13px;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+  /* Header */
+  .report-header {
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    color: white;
+    padding: 40px 50px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+  }
+  .report-header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin-bottom: 6px;
+  }
+  .report-header .subtitle {
+    font-size: 15px;
+    color: #a8b2d1;
+    font-weight: 400;
+  }
+  .report-header .meta {
+    margin-top: 14px;
+    font-size: 11.5px;
+    color: #8892b0;
+  }
+  .report-header .meta span { margin-right: 20px; }
+
+  /* Section */
+  .section {
+    background: white;
+    border-radius: 6px;
+    padding: 28px 32px;
+    margin-bottom: 22px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    page-break-inside: avoid;
+  }
+  .section h2 {
+    font-size: 17px;
+    color: #302b63;
+    border-bottom: 2px solid #e8e8f0;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  .section h3 {
+    font-size: 14px;
+    color: #4a4a6a;
+    margin: 16px 0 8px 0;
+  }
+  .section h4 {
+    font-size: 13px;
+    color: #666;
+    margin: 12px 0 6px 0;
+  }
+
+  /* Executive Summary */
+  .exec-bullets { list-style: none; padding: 0; }
+  .exec-bullets li {
+    padding: 8px 12px 8px 28px;
+    position: relative;
+    margin-bottom: 4px;
+    background: #f8f9ff;
+    border-radius: 4px;
+    border-left: 3px solid #302b63;
+  }
+  .exec-bullets li::before {
+    content: "▸";
+    position: absolute;
+    left: 10px;
+    color: #302b63;
+    font-weight: bold;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 12.5px;
+  }
+  th, td {
+    padding: 7px 10px;
+    text-align: left;
+    border-bottom: 1px solid #e8e8f0;
+  }
+  th {
+    background: #f0f0f8;
+    color: #302b63;
+    font-weight: 600;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  tr:hover { background: #fafaff; }
+  td.num { text-align: center; font-weight: 600; }
+  td.num-zero { text-align: center; color: #ccc; }
+  .total-row { background: #f0f0f8; font-weight: 600; }
+
+  /* Heat colors for timeline */
+  .heat-0 { color: #ccc; }
+  .heat-low { color: #5c6bc0; }
+  .heat-med { color: #1565c0; font-weight: 700; }
+  .heat-high { color: #0d47a1; font-weight: 700; background: #e3f2fd; }
+
+  /* Agreement blocks */
+  .agreement-block {
+    background: #f8f9ff;
+    border-left: 3px solid #5c6bc0;
+    padding: 10px 14px;
+    margin: 8px 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+  .agreement-block.conclusion {
+    border-left-color: #26a69a;
+  }
+  .agreement-block.working-assumption {
+    border-left-color: #ffa726;
+  }
+  .agreement-block .block-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .agreement-block .block-label.type-agreement { color: #5c6bc0; }
+  .agreement-block .block-label.type-conclusion { color: #26a69a; }
+  .agreement-block .block-label.type-working-assumption { color: #ffa726; }
+  .block-meeting {
+    display: inline-block;
+    background: #e8eaf6;
+    color: #3949ab;
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-left: 8px;
+    font-weight: 600;
+  }
+
+  /* Contribution badges */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge-nokia { background: #e3f2fd; color: #1565c0; }
+  .badge-ericsson { background: #fce4ec; color: #c62828; }
+
+  /* Insights */
+  .insight-card {
+    background: linear-gradient(135deg, #f3e7ff 0%, #e8eaf6 100%);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin: 12px 0;
+    border-left: 4px solid #7c4dff;
+  }
+  .insight-card h4 {
+    color: #4a148c;
+    margin: 0 0 8px 0;
+    font-size: 13.5px;
+  }
+  .insight-card p { font-size: 12.5px; color: #333; }
+
+  /* Placeholder notes */
+  .placeholder {
+    background: #fff8e1;
+    border: 1px dashed #ffc107;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin: 8px 0;
+    font-size: 11.5px;
+    color: #795548;
+  }
+  .placeholder::before {
+    content: "✏ AERIAL ALIGNMENT NOTE: ";
+    font-weight: 700;
+    color: #e65100;
+  }
+
+  /* Company strategy boxes */
+  .strategy-box {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 12px 0;
+  }
+  .strategy-box.nokia { border-left: 4px solid #1565c0; }
+  .strategy-box.ericsson { border-left: 4px solid #c62828; }
+  .strategy-box h4 { margin: 0 0 8px 0; }
+
+  /* Signaling table */
+  .sig-table th { font-size: 11px; }
+  .sig-table td { font-size: 12px; }
+
+  /* Print */
+  @media print {
+    body { background: white; font-size: 11px; }
+    .container { padding: 0; max-width: 100%; }
+    .report-header { border-radius: 0; padding: 30px; }
+    .section { box-shadow: none; border: 1px solid #e0e0e0; }
+    .section { page-break-inside: auto; }
+    .agreement-block { page-break-inside: avoid; }
+  }
+
+  /* Two-column for contribution tables */
+  .two-col { display: flex; gap: 20px; flex-wrap: wrap; }
+  .two-col > div { flex: 1; min-width: 300px; }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 16px;
+    margin: 8px 0;
+    font-size: 11px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  .legend-swatch {
+    width: 12px; height: 12px; border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="report-header">
+  <h1>AI-RAN Standards Intelligence Brief</h1>
+  <div class="subtitle">3GPP Rel-19 AI/ML for NR Air Interface &mdash; Implications for NVIDIA Aerial</div>
+  <div class="meta">
+    <span>Source: RAN1 Session Notes #116 &ndash; #120 (Feb 2024 &ndash; Feb 2025)</span>
+    <span>Generated: March 2026</span>
+  </div>
+</div>
+
+<!-- 1. EXECUTIVE SUMMARY -->
+<div class="section">
+  <h2>1. Executive Summary</h2>
+  <ul class="exec-bullets">
+    <li><strong>237 formal decisions</strong> (agreements, conclusions, working assumptions) were reached across 7 RAN1 sessions, with beam management (47) and positioning (60) leading in consensus volume.</li>
+    <li><strong>CSI prediction transitions from study to normative work</strong> at RAN1 #120 (Feb 2025) &mdash; a critical inflection point. Prior to this, 6 sessions were study-only. Ericsson's multi-step prediction results (N4=4) are the strongest in the field.</li>
+    <li><strong>CSI compression converges on Transformer backbone</strong> (Case 0, spatial-frequency domain input) agreed at #119. Three inter-vendor collaboration directions (A: parameter exchange, B: direct transfer, C: fully standardized model) remain open &mdash; Direction C would most constrain GPU implementations.</li>
+    <li><strong>Ericsson controls the positioning specification</strong> as moderator for agenda 9.1.2 across all 7 meetings, shaping every measurement format and signaling procedure. Nokia participates broadly but drives no sub-agenda.</li>
+    <li><strong>The RRC parameter surface</strong> (R1-2501143) defines the exact integration points for NVIDIA Aerial: CSI-ReportConfig extensions, Associated ID mechanism, OtherConfig for UAI, and LPP extensions for positioning.</li>
+  </ul>
+</div>
+
+<!-- 2. AGREEMENT PROGRESSION TIMELINE -->
+<div class="section">
+  <h2>2. Agreement Progression Timeline</h2>
+  <p style="margin-bottom: 10px; font-size: 12px; color: #666;">Count of formal decisions (Agreements + Conclusions + Working Assumptions) per meeting per use case.</p>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-swatch" style="background:#5c6bc0"></div> Agreement</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#26a69a"></div> Conclusion</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#ffa726"></div> Working Assumption</div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Use Case</th>
+        
+        <th style="text-align:center">#116</th>
+        
+        <th style="text-align:center">#116bis</th>
+        
+        <th style="text-align:center">#117</th>
+        
+        <th style="text-align:center">#118</th>
+        
+        <th style="text-align:center">#118bis</th>
+        
+        <th style="text-align:center">#119</th>
+        
+        <th style="text-align:center">#120</th>
+        
+        <th style="text-align:center">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><strong>Beam Management</strong></td>
+        
+        
+        
+        <td class="num heat-med">4</td>
+        
+        
+        
+        
+        <td class="num heat-med">6</td>
+        
+        
+        
+        
+        <td class="num heat-med">5</td>
+        
+        
+        
+        
+        <td class="num heat-med">5</td>
+        
+        
+        
+        
+        <td class="num heat-high">11</td>
+        
+        
+        
+        
+        <td class="num heat-high">10</td>
+        
+        
+        
+        
+        <td class="num heat-med">6</td>
+        
+        
+        <td class="num" style="background:#f0f0f8;">47</td>
+      </tr>
+      
+      <tr>
+        <td><strong>Positioning</strong></td>
+        
+        
+        
+        <td class="num heat-high">9</td>
+        
+        
+        
+        
+        <td class="num heat-high">13</td>
+        
+        
+        
+        
+        <td class="num heat-med">6</td>
+        
+        
+        
+        
+        <td class="num heat-high">8</td>
+        
+        
+        
+        
+        <td class="num heat-med">5</td>
+        
+        
+        
+        
+        <td class="num heat-med">5</td>
+        
+        
+        
+        
+        <td class="num heat-high">14</td>
+        
+        
+        <td class="num" style="background:#f0f0f8;">60</td>
+      </tr>
+      
+      <tr>
+        <td><strong>CSI Prediction</strong></td>
+        
+        
+        
+        <td class="num heat-high">8</td>
+        
+        
+        
+        
+        <td class="num heat-high">12</td>
+        
+        
+        
+        
+        <td class="num heat-low">2</td>
+        
+        
+        
+        
+        <td class="num heat-low">2</td>
+        
+        
+        
+        
+        <td class="num heat-low">3</td>
+        
+        
+        
+        
+        <td class="num-zero">&mdash;</td>
+        
+        
+        
+        
+        <td class="num heat-med">4</td>
+        
+        
+        <td class="num" style="background:#f0f0f8;">31</td>
+      </tr>
+      
+      <tr>
+        <td><strong>CSI Compression</strong></td>
+        
+        
+        
+        <td class="num heat-high">11</td>
+        
+        
+        
+        
+        <td class="num heat-high">12</td>
+        
+        
+        
+        
+        <td class="num heat-high">10</td>
+        
+        
+        
+        
+        <td class="num heat-med">6</td>
+        
+        
+        
+        
+        <td class="num heat-high">7</td>
+        
+        
+        
+        
+        <td class="num heat-high">9</td>
+        
+        
+        
+        
+        <td class="num heat-high">13</td>
+        
+        
+        <td class="num" style="background:#f0f0f8;">68</td>
+      </tr>
+      
+      <tr>
+        <td><strong>Other Aspects</strong></td>
+        
+        
+        
+        <td class="num heat-low">3</td>
+        
+        
+        
+        
+        <td class="num heat-med">4</td>
+        
+        
+        
+        
+        <td class="num heat-low">3</td>
+        
+        
+        
+        
+        <td class="num heat-high">9</td>
+        
+        
+        
+        
+        <td class="num heat-med">4</td>
+        
+        
+        
+        
+        <td class="num heat-med">4</td>
+        
+        
+        
+        
+        <td class="num heat-low">2</td>
+        
+        
+        <td class="num" style="background:#f0f0f8;">29</td>
+      </tr>
+      
+      <tr class="total-row">
+        <td><strong>Total</strong></td>
+        
+        <td class="num">35</td>
+        
+        <td class="num">47</td>
+        
+        <td class="num">26</td>
+        
+        <td class="num">30</td>
+        
+        <td class="num">30</td>
+        
+        <td class="num">28</td>
+        
+        <td class="num">39</td>
+        
+        <td class="num">235</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:10px; font-size:11.5px; color:#666;">
+    <strong>Key pattern:</strong> Beam management and positioning drove the highest early consensus.
+    CSI prediction remained study-only until #120 when normative work began.
+    CSI compression peaked at #116bis with 13+ decisions on inter-vendor collaboration framework.
+  </p>
+</div>
+
+<!-- 3. USE CASE DEEP DIVES -->
+
+
+
+<div class="section">
+  <h2>3.1 Beam Management Deep Dive</h2>
+  <p style="margin-bottom:6px; font-size:12px; color:#666;">
+    41 agreements, 4 conclusions, 2 working assumptions
+  </p>
+
+  
+  
+  <h3>#116 (Feb 2024, Athens, Greece)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    For NW-sided model, for inference, in a beam report initiated by network, based on one 
+measurement resource set, support the report of more than 4 beam related information in L1 
+signaling
+
+Note: Purpose, such as above “For NW-sided model, for inference”, will not be specified in RAN 
+1 specifications
+
+FFS on the report content for beam related information 
+
+FFS on max number of reported beam...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    For UE-sided model, at least for BM-Case1, for content in the report of inference results, 
+support 
+
+Opt 1: Beam information on predicted Top K beam(s) among a set of beams
+
+Opt 2: Beam information on predicted Top K beam(s) among a set of beams and RSRP of 
+predicted Top K beam(s) among a set of beams
+
+At least K=1 and more, FFS on max value
+
+FFS on beam information 
+
+FFS on the definition...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    
+For NW-sided model and for UE-sided model, beam indication is based on unified TCI state 
+framework
+
+FFS on whether/how potential enhancement is needed
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#116</span></div>
+    For UE sided model at least for inference, for measurement, the configuration of Set B, 
+
+take the current CSI framework as the starting point
+  </div>
+  
+  
+  
+  
+  
+  <h3>#116bis (Apr 2024, Changsha, China)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116bis</span></div>
+    For UE-side AI/ML model inference, for BM-Case2, support to report inference results of N(N>=1, FFS on N) future 
+time instance(s) in one report 
+
+wherein information of inference results of one time instance is as in one report for BM-Case 1 
+o
+Note: overhead reduction is not precluded 
+
+FFS on details
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116bis</span></div>
+    For network-sided AI/ML model for BM-Case1 and BM-Case2, 
+
+support using existing CSI framework for configuration of Set A as the starting point
+
+support using existing CSI framework for configuration of Set B as the starting point
+
+Note: Purpose, such as above “For NW-sided model, for BM-Case1 and BM-Case2” and “Set A” and “Set B”, 
+will not be specified in RAN 1 specifications
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116bis</span></div>
+    For report content of inference results for UE-sided model for BM-Case 1, for the RSRP of predicted Top K beam(s) in 
+the report of inference results, when applicable, further study the following options:
+
+Option A: Predicted RSRP
+
+Option B: Predicted RSRP, if the beam is not configured for corresponding measurement, and measured L1-
+RSRP if the beam is configured for corresponding...
+  </div>
+  
+  <div class="agreement-block working-assumption">
+    <div class="block-label type-working-assumption">Working Assumption<span class="block-meeting">#116bis</span></div>
+    For report content of inference results for UE-sided model for BM-Case 2, the RSRP of predicted beam(s) in the report 
+of inference results, is the predicted RSRP, where the predicted RSRP is based on AI/ML output
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116bis</span></div>
+    For UE-sided model at least for BM Case-1, CSI-ReportConfig is used for the configuration of inference results 
+reporting
+
+FFS on the details in the CSI-ReportConfig, at least considering:
+o
+Alt 1: one CSI-ResourceConfigId is configured for Set B
+
+FFS: how UE can determine the information about set A
+o
+Alt 2: one CSI-ResourceConfigId is configured for both Set A and Set B
+
+FFS: How to...
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 1 more decisions at this meeting</p>
+  
+  
+  
+  
+  <h3>#117 (May 2024, Fukuoka, Japan)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#117</span></div>
+    For BM-Case1 and BM-Case2 with a UE-side AI/ML model:
+
+Support Type 1 performance monitoring, including the following two options: 
+o
+Option 1 (NW-side performance monitoring): 
+
+UE sends a report to NW (for the calculation of performance metric at NW) 
+
+Measurement results from resource set for monitoring, e.g., L1-RSRP and/or RS 
+index is supported as the content of the report
+
+FFS on other...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#117</span></div>
+    At least for NW sided model, for the quantization of a reported L1-RSRP value at least for the report in L1 signaling, 
+support
+o
+Support differential L1-RSRP reporting with legacy quantization step and range 
+o
+FFS: larger quantization step(s) than the already supported legacy quantization step for differential 
+L1-RSRP and/or for absolute L1-RSRP
+o
+FFS: Smaller range(s) for differential L1-RSRP...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#117</span></div>
+    Following Working Assumption is confirmed.
+  </div>
+  
+  <div class="agreement-block working-assumption">
+    <div class="block-label type-working-assumption">Working Assumption<span class="block-meeting">#117</span></div>
+    For report content of inference results for UE-sided model for BM-Case 2, the RSRP of predicted beam(s) in the report 
+of inference results, is the predicted RSRP, where the predicted RSRP is based on AI/ML output.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#117</span></div>
+    For NW-sided model, for inference report, at least for BM-Case 1, the content in a beam report in L1 signaling, support 
+
+L1-RSRPs and corresponding beam information of Top M beam(s) with largest M measured value(s) of L1-
+RSRP(s) of a measurement resource set, where M is configured by gNB 
+
+If M = the size of the measurement resource set, the content is all L1-RSRPs and one beam index (i.e.,...
+  </div>
+  
+  
+  
+  
+  
+  <h3>#118 (Aug 2024, Maastricht, NL)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118</span></div>
+    For UE sided model in beam management, support associated ID
+
+[Working Assumption]
+o
+The associated ID at least can be configured within CSI framework 
+
+FFS on details
+
+FFS on whether/how to configure/indicate the associated ID via other signal(s) and/or in 
+other procedure(s)/framework(s)
+
+UE may assume the similar properties of a DL Tx beam or beam set/list associated with the same...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118</span></div>
+    For UE-sided model, for the quantization of a RSRP value at least for the report of inference results, support
+o
+Support differential RSRP reporting with legacy quantization step and range for L1-RSRP reporting
+o
+For BM-Case 1, support differential RSRP report among multiple beams
+o
+For BM-Case 2, support differential RSRP report among multiple beams over multiple time instances 
+
+FFS details
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118</span></div>
+    For UE-sided model at least for BM Case-1, for inference results report 
+
+Two resource sets can be configured for Set A and Set B separately in the CSI report configuration for the 
+report
+o
+FFS whether support only resource set for Set B is configured
+
+UE performs measurement on the resource set for Set B for inference, and UE is not expected to measure 
+resource set for Set A for inference,...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118</span></div>
+    For BM-Case1 and BM-Case2 with a UE-sided AI/ML model, for Option 2 (UE-assisted performance monitoring), 
+further study at least the following alternatives, including:
+
+Alt 1: Top 1 or Top K beam prediction accuracy (with or without margin) by comparing the prediction results 
+and the Top 1 or Top K beam based on the measurements from a resource set/resources for monitoring
+
+Alt 2: The L1-RSRP...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118</span></div>
+    For UE-sided model for BM-Case 2, for inference results report, support to configure UE with N future time instance(s) 
+for inference by NW when applicable
+
+FFS: how to determinate reference time for the time instance(s)
+
+FFS: duration values of the N time instance(s) that can be predicted.
+  </div>
+  
+  
+  
+  
+  
+  <h3>#118bis (Oct 2024, Hefei, China)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    Answer to Q2 in R1-2407604 as below:
+RAN 1 did not have agreement on the content of NW-side additional condition. RAN1 agreed to support associated ID 
+and it can be used to ensure the consistency of NW-side additional condition across training and inference for UE-sided 
+model for BM-Case 1 and BM Case 2. UE may assume the similar properties of a DL Tx beam or beam set/list 
+associated with the...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    For BM-Case1 and BM-Case2 with a UE-sided AI/ML model, for Option 2 (UE-assisted performance monitoring), 
+
+At least support Alt 1: Top 1 or Top K beam prediction accuracy (with or without margin) by comparing the 
+prediction results and the Top 1 or Top K beam based on the measurements from a resource set/ resources for 
+monitoring
+o
+FFS on detail definition of the metric, including whether/how...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    For BM-Case 2 of UE-side model, for the reference time of the earliest time instance for the predicted results, consider 
+at least the following alternatives for potential down-selection:
+
+Option 1: Based on the uplink slot for the report
+
+Option 2: Based on the CSI reference resource corresponding to the report
+
+Option 3: Based on the latest transmission occasion of the CSI-RS/SSB resource in...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    For UE-side model, existing CPU mechanism is used as a starting point for AI/ML-based CSI processing.
+
+FFS whether the overall CPU should be shared or separately counted between legacy CSI reporting and 
+AI/ML-based CSI reporting, and among AI/ML features/functionalities.
+
+FFS whether it is fully applicable for BM-Case 1 and/or BM-Case 2
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    For UE-side AI/ML  model, for BM-Case1, at least for inference, at least for Set B, support the following CSI-RS 
+resource types for CMR:
+
+Periodic (P) CSI-RS
+
+Semi-persistent (SP) CSI-RS
+
+Aperiodic (AP) CSI-RS 
+For UE-side AI/ML model, for BM-Case 2, at least for inference, at least for Set B, support the following CSI-RS 
+resource types for CMR:
+
+Periodic (P) CSI-RS
+
+Semi-persistent (SP)...
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 6 more decisions at this meeting</p>
+  
+  
+  
+  
+  <h3>#119 (Nov 2024, Orlando, US)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#119</span></div>
+    
+For UE-sided model, at least for BM-Case 1, the beam information in inference result report is 
+CRI/SSBRI of resource in Set A.
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#119</span></div>
+    For BM-Case 2 of UE-side model, only fixed Set B across different time instance is supported for single 
+CSI report.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#119</span></div>
+    For both BM-Case 1 and BM-Case 2, for UE-sided model for inference, when Set A and Set B are 
+configured within CSI report configuration, 
+
+Two CSI-ResourceConfigId s are configured for Set A and Set B separately
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#119</span></div>
+    •
+In Step 3, following configurations are provided from NW to UE:
+o
+UE is allowed to do UAI reporting via OtherConfig,
+o
+The applicability report is based on A) and/or B) 
+
+It is up to RAN 2 to design the container 
+
+A) one or more of CSI-ReportConfig for inference configuration (wherein the 
+associated ID may be configured in CSI framework as working assumption 
+applied) 
+
+Note: CSI report...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#119</span></div>
+    At least for the monitoring Type 1 Option 2 of UE-side model monitoring (when applicable), support 
+to reuse CSI framework for the configuration for monitoring result report in L1 signaling: 
+
+Dedicated resource set(s) for monitoring and report configuration for monitoring are configured in a 
+dedicated CSI report configuration used for monitoring
+o
+The ID of an inference report configuration is...
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 5 more decisions at this meeting</p>
+  
+  
+  
+  
+  <h3>#120 (Feb 2025, Athens, Greece)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    For report content of inference results for UE-sided model, where the largest RSRP value is quantized to a 7-bit value in 
+the range [-140, -44] dBm with 1dB step size, and the differential RSRP is quantized to a 4-bit value with 2 dB step 
+size.
+Note: the model output is UE implementation and it doesn’t have to be RSRP subject to dBm value.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    For report content of inference results for UE-sided model for BM-Case 1, the RSRP of predicted beam(s)in the report 
+of inference results, is the predicted RSRP, where the predicted RSRP is based on AI/ML output.
+Note: how to capture it in the spec is a separate discussion.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    For UE-side AI/ML model inference and BM-Case2, for the quantization of a RSRP value of inference results in a 
+report over multiple future time instances, 
+
+the largest RSRP value based on prediction of all time instances is the reference RSRP, and differential RSRPs in 
+the report are computed relative to the reference RSRP. 
+
+The time instance information of the beam with the largest RSRP...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    For inference, for BM-Case 2 of UE-side model, 
+
+The time gap between two consecutive future time instances is configured by RRC, and the number of future 
+time instance(s) N is configured by RRC.
+o
+time gap is [10ms, 20ms, 40ms, 80ms, 160ms]
+o
+N = [1, 2, 4, 8]
+
+Reference time of the earliest time instance for the predicted results is based on the most recent occasion of the 
+CSI-RS/SSB...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    For UE-sided model, for configuring the resource for data collection purpose, support
+
+CSI-ReportConfig can used for configuring the resources for data collection purpose without CSI report.  
+o
+One CSI-ResourceConfigId is configured for Set A.
+o
+One CSI-ResourceConfigId is configured for Set B.
+o
+Note: UE performs measurement on all resources
+o
+One or two associated IDs can be configured in...
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 1 more decisions at this meeting</p>
+  
+  
+  
+
+  
+  <h3>What's Still Open</h3>
+  <ul style="margin:6px 0 6px 20px; font-size:12.5px;">
+    <li>Feature Group (FG) definition and granularity for UE capabilities</li>
+    <li>Whether associated ID is mandatory or optional</li>
+    <li>CSI processing timeline for BM-Case1 and BM-Case2</li>
+    <li>Connection between monitoring RSs and Set A beams</li>
+  </ul>
+  <div class="placeholder">How does Aerial's L1 acceleration handle the CSI-ReportConfig extensions for AI/ML beam prediction? What's the inference latency target for BM-Case2 temporal prediction?</div>
+
+  
+</div>
+
+
+
+
+<div class="section">
+  <h2>3.2 Positioning Deep Dive</h2>
+  <p style="margin-bottom:6px; font-size:12px; color:#666;">
+    46 agreements, 7 conclusions, 7 working assumptions
+  </p>
+
+  
+  
+  <h3>#116 (Feb 2024, Athens, Greece)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    For Rel-19 AI/ML based positioning, the measurements for determining model input are based on the 
+DL PRS and UL SRS defined in TS38.211.
+
+Note: The use of SRS for MIMO resource is transparent to UE.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    
+For AI/ML based positioning case 3b, at least the following types of time domain channel 
+measurements are supported for reporting: 
+(a)
+timing information;
+(b)
+paired timing information and power information.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    
+For AI/ML based positioning case 2b, at least the following types of time domain channel 
+measurements are supported for UE reporting to LMF: 
+(a) timing information;
+(b) paired timing information and power information.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    In Rel-19 AI/ML based positioning, regarding the time domain channel measurements, RAN1 
+investigate the following alternatives:
+
+Alternative (a).  Sample-based measurements, where the timing information is an integer multiple of 
+sampling periods. 
+
+Alternative  (b).   Path-based  measurements,  where  the  timing  information  is  according  to  the 
+detected path timing and may not be an...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    For AI/ML assisted positioning Case 3a, at least LOS/NLOS indicator and/or timing information are 
+supported for reporting. 
+
+If LOS/NLOS indicator is reported, the indicator can be reported as soft indicator or hard indicator as 
+defined in 38.214.
+
+If timing information is reported, the timing information at least can be reported via UL RTOA or 
+gNB Rx-Tx time difference as defined in...
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 4 more decisions at this meeting</p>
+  
+  
+  
+  
+  <h3>#116bis (Apr 2024, Changsha, China)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116bis</span></div>
+    For AI/ML based positioning Case 3b, for gNB channel measurements reported to LMF, the timing information is 
+represented relative to the existing UL RTOA reference time T0+tSRS as defined in TS 38.215. 
+FFS: whether it is applicable when Case 3b is used to support multi-RTT
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#116bis</span></div>
+    
+It is out of RAN1 scope to decide whether/how synthetic data (i.e., not direct physical data) and related entities 
+are used in AI/ML based positioning. In RAN1 discussion, data (e.g., measurement data, label data) refer to 
+physical data, not synthetic data.
+  </div>
+  
+  <div class="agreement-block working-assumption">
+    <div class="block-label type-working-assumption">Working Assumption<span class="block-meeting">#116bis</span></div>
+    For training data generation of AI/ML based positioning Case 1, the measurement and its related data (e.g., timestamp) 
+are generated by PRU and/or Non-PRU UE.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116bis</span></div>
+    For training data generation of AI/ML based positioning Case 3a and 3b, the measurement and its related data (e.g., 
+timestamp) are generated by TRP/gNB.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116bis</span></div>
+    For training data collection of AI/ML based positioning, the collected data sample can include the following 
+components:
+Part A:
+
+channel measurement 
+
+quality indicator of channel measurement
+
+time stamp of channel measurement
+Part B:
+
+ground truth label (or its approximation)
+
+quality indicator of label
+
+time stamp of label
+Note: “Part A” and “Part B” terminologies are only for RAN1...
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 8 more decisions at this meeting</p>
+  
+  
+  
+  
+  <h3>#117 (May 2024, Fukuoka, Japan)</h3>
+  
+  <div class="agreement-block working-assumption">
+    <div class="block-label type-working-assumption">Working Assumption<span class="block-meeting">#117</span></div>
+    For training data generation of AI/ML based positioning Case 3b, the label and its related data (e.g., time stamp) can be 
+generated by:
+
+PRU
+
+Non-PRU UE with estimated location
+
+LMF
+Note: transfer of label and its related data is out of RAN1 scope.
+Note: It is assumed that user data privacy of non-PRU UE is preserved.
+Note: Previous related working assumption made in RAN1#116bis for training...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#117</span></div>
+    Sample-based measurement is defined as:
+
+The measurement is composed of Nt' samples of the estimated channel response in time domain. The timing 
+information for the Nt' samples are reported with a timing granularity T, where T=2 kxTc. k represents the 
+timing reporting granularity factor. Tc is the basic time unit for NR. 
+o
+The corresponding measurement (e.g., power if reported) corresponds to...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#117</span></div>
+    Path-based measurement refers to the measurement in the existing specifications (up to Rel-18) including measurement 
+reporting, with potential enhancements on the number of reported paths (if needed).
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#117</span></div>
+    For training data collection of AI/ML based positioning, if a training data sample contains both Part A and Part B, 
+RAN1 assumes that Part A and Part B in one training data sample are: 
+
+for a same UE (PRU or Non-PRU UE), and 
+
+for a same location associated with Part B.
+Note: the association can be discussed
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#117</span></div>
+    Draft LS R1-2405577 is endorsed in principle by adding the latest agreements made in this meeting and adding 
+“agreements” to “Note: the working assumptions above are based on RAN1 understanding for RAN work item 
+(NR_AIML_air).”
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 1 more decisions at this meeting</p>
+  
+  
+  
+  
+  <h3>#118 (Aug 2024, Maastricht, NL)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118</span></div>
+    For AI/ML positioning Case 3a, for performance monitoring metric calculation in label-based monitoring, from RAN1 
+perspective, Option A and Option B are feasible,
+
+Option A.
+NG-RAN node performs monitoring metric calculation for its own model.
+
+Option B.
+LMF performs monitoring metric calculation for the model located at the NG-RAN node.
+Note: Final selection of Option A and Option B is out of...
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#118</span></div>
+    For model performance monitoring of AI/ML positioning Case 1, for model performance monitoring metric calculation 
+in label-based model monitoring,
+
+Option A-4 can be realized by implementation in a manner transparent to specification specification if the PRU 
+sends information to the target UE side in a proprietary method. No further discussion on Option A-4.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118</span></div>
+    For training data collection of AI/ML based positioning case 3b, for time stamp of channel measurement, 
+
+For channel measurement generated by TRP/gNB, existing IE “Time Stamp” in TS 38.455 can be reused from 
+RAN1 perspective
+
+Note: Purpose, such as above “training data collection", will not necessarily be specified in RAN 1 specifications
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118</span></div>
+    For training data collection of Case 1 and 2a, in terms of DL PRS configuration for collecting training data, RAN1 
+study the following options on assistance data, using legacy mechanisms as a starting point:
+Option A. 
+(UE initiated) UE makes a request to LMF on the preferred DL PRS configuration for training data 
+collection, e.g., on-demand PRS. LMF makes the decision on determining the DL PRS...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118</span></div>
+    For the definition of sample-based measurement, select Nt’ samples out of a list of Nt consecutive samples
+
+The Nt samples have timing granularity T. 
+
+FFS: the starting time of the list of Nt samples 
+
+FFS: the value range of Nt 
+For the sample-based measurement (if accepted in Rel-19), 
+
+
+
+
+For measurement by TRP/gNB, the Nt’ selected samples are expected to be those with the highest...
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 3 more decisions at this meeting</p>
+  
+  
+  
+  
+  <h3>#118bis (Oct 2024, Hefei, China)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    For training data collection of AI/ML based positioning, the quality indicator of timing information in Part A when 
+reported is:
+
+When applicable,  the existing IE for timing quality, i.e., NR-TimingQuality in 37.355 and IE “Timing 
+Measurement Quality” in 38.455;
+o
+FFS: details on how to associate quality indicator to timing information
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#118bis</span></div>
+    For training data collection of Case 1, in terms of DL PRS configuration for collecting training data, both options are 
+feasible by using legacy mechanisms:
+Option A. (UE initiated) UE makes a request to LMF on the preferred DL PRS configuration for training data 
+collection, e.g., on-demand PRS. LMF makes the decision on determining the DL PRS configuration for training 
+data collection and...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    From RAN1 perspective, for model inference of AI/ML positioning Case 3b, at least the following are mandatorily or 
+optionally supported in a measurement report from gNB to LMF:
+
+(Mandatory) Channel measurement; 
+
+(Optional) Quality of the channel measurement; 
+o
+FFS: details of the quality
+
+(Mandatory) Time stamp of the channel measurement.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    From RAN1 perspective, when timing information is reported for Rel-19 AI/ML positioning Case 3a, at least the 
+following are mandatorily or optionally supported in a measurement report from gNB to LMF:
+
+(Mandatory) timing information; 
+
+(Optional) Quality of the timing information;
+o
+Existing IE “Timing Measurement Quality” can be reused.
+
+(Mandatory) Time stamp.
+FFS: LOS/NLOS indicator.
+Note:...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    For AI/ML positioning Case 1, regarding the assistance data provided from LMF to UE, for ensuring consistency 
+between training and inference, 
+
+for each of the existing assistance data IE of UE-based DL-TDOA and/or UE-based DL-AoD, study whether it 
+should be: (a) explicitly indicated, (b) implicitly indicated and/or (c) other; 
+
+Companies can provide inputs on further enhancements of existing...
+  </div>
+  
+  
+  
+  
+  
+  <h3>#119 (Nov 2024, Orlando, US)</h3>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#119</span></div>
+    For measurement report of AI/ML assisted positioning Case 3a, regarding the report of LOS/NLOS 
+indicator, 
+
+LOS/NLOS indicator can’t be reported independently from other measurements
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#119</span></div>
+    For the definition of sample-based measurement, for gNB/TRP measurement of an estimated channel 
+response between a pair of UE and TRP, the starting time of the list of Nt consecutive samples is 
+determined as follows.
+o
+starting time = first detected path rounded down with timing granularity T.
+Note: UE-side measurement is a separate discussion
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#119</span></div>
+    For model performance monitoring of AI/ML positioning Case 1, support at least: 
+
+Option A. The target UE side performs monitoring metric calculation. 
+o
+The target UE may signal the monitoring outcome to the LMF. 
+o
+FFS: content of monitoring outcome
+
+FFS: Option B
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#119</span></div>
+    For Rel-19 AI/ML based positioning, for Case 3b, in addition to path-based measurement that is 
+referring to the measurement in the existing specifications (up to Rel-18), additionally support the 
+following enhancement to the measurement, 
+
+The measurement is composed of Nt' values of the estimated channel response in time 
+
+
+
+domain. The Nt’ values are selected from a list of Nt consecutive...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#119</span></div>
+    For AI/ML based positioning Case 1, all assistance information from legacy UE-based DL-TDOA, other 
+than info #7, can be provided from LMF to UE. For info #7, RAN1 study, if necessary, choose one 
+alternative from the following:
+
+Alternative 1. Info #7 is provided implicitly via associated ID.
+o
+Associated ID is signaled by LMF to indicate whether info #7 is consistent between training and...
+  </div>
+  
+  
+  
+  
+  
+  <h3>#120 (Feb 2025, Athens, Greece)</h3>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#120</span></div>
+    For AI/ML based positioning Case 3a, regarding the time stamp in a measurement report from gNB to LMF,
+
+Existing IE “Time Stamp” in TS 38.455 can be reused from RAN1 perspective.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    For Rel-19 AI/ML based positioning, for Case 3b, “FFS: k” in RAN1#119 agreement is resolved by supporting:
+
+k = {0...5}
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    For Rel-19 AI/ML based positioning, for Case 3b, “FFS: Nt' values” in RAN1#119 agreement is resolved by 
+supporting:
+
+Nt' = {8, 16, 24}
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    For AI/ML based positioning Case 1, from RAN1 perspective, when the label data of location is generated by LMF and 
+transferred from LMF to UE, label and quality indicator of label can be provided by reusing existing IEs. 
+
+From RAN1 perspective, the existing IE can use one of the geographic shapes defined in TS 23.032. The 
+location estimate uncertainty and confidence (if included with the...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    For AI/ML based positioning, 
+
+When channel measurement is to be reported/sent, time stamp of channel measurement refers to the time 
+instance when the channel measurement is performed.
+
+When label is to be reported/sent, time stamp of label is the time instance for which the label is valid.
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 9 more decisions at this meeting</p>
+  
+  
+  
+
+  
+  <h3>What's Still Open</h3>
+  <ul style="margin:6px 0 6px 20px; font-size:12.5px;">
+    <li>Case 1 info #7 (TRP coordinates): 4 alternatives pending down-selection</li>
+    <li>Case 2b measurements (2nd priority, deferred)</li>
+    <li>Positioning AI/ML Processing capability UE feature details</li>
+  </ul>
+  <div class="placeholder">Ericsson shapes every positioning measurement format. How does Aerial's GPU-accelerated positioning pipeline align with the sample-based vs path-based measurement framework?</div>
+
+  
+</div>
+
+
+
+
+<div class="section">
+  <h2>3.3 CSI Prediction Deep Dive</h2>
+  <p style="margin-bottom:6px; font-size:12px; color:#666;">
+    24 agreements, 7 conclusions, 0 working assumptions
+  </p>
+
+  
+  
+  <h3>#116 (Feb 2024, Athens, Greece)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    For Rel-19 study on CSI prediction, consider EVM agreed in Rel-18 CSI prediction based on UE-sided 
+model as a starting point.
+
+
+
+
+FFS on additional assumptions, e.g., channel estimation error, phase discontinuity, CSI-RS 
+periodicity.
+
+Note: Rel-18 CSI-RS configuration/reporting can be reused. 
+
+Note: additional EVM and corresponding template to collect the results can be updated.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    For Rel-19 study on CSI prediction, companies are encouraged to evaluate throughput performance 
+by comparing performance with non-AI/ML based CSI prediction. 
+
+R18 eType II doppler codebook is assumed for CSI report for both AI/ML and Non AI/ML 
+prediction. 
+
+Companies to report the assumption for N4, which could be 1, 2, 4, 8.
+Note: Non-AI/ML based CSI prediction (Benchmark 2) can include...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    For evaluation, to report computational complexity in unit of FLOPs including additional complexity if applicable, e.g., 
+update of filter, and their assumption on non-AI based CSI prediction when performance results are provided.
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#116</span></div>
+    For the evaluation of the AI/ML based CSI prediction, it is up to companies to choose the modelling 
+method and companies should report if ‘Channel estimation’ and/or ‘phase discontinuity’ is/are 
+considered by companies.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    For the evaluation of the AI/ML based CSI prediction, consider following CSI-RS configuration
+
+Periodic: 5 ms periodicity (baseline), 20 ms periodicity (encouraged) 
+
+Aperiodic: Optional, CSI-RS burst with K resources and time interval m slots (based on R18 MIMO 
+eType-II)
+Note: Companies to report observation window (number/distance) and prediction window 
+(number/distance between prediction...
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 3 more decisions at this meeting</p>
+  
+  
+  
+  
+  <h3>#116bis (Apr 2024, Changsha, China)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116bis</span></div>
+    
+For the AI/ML based CSI prediction, adopt following assumptions as a baseline for evaluation purpose
+o
+UE speed: 30km/h, 60km/h
+
+Others can be additionally submitted, e.g., 10km/h, 120km/h
+o
+Observation window (number/distance): 5/5ms,10/5ms
+
+Others can be additionally submitted, e.g., 4/5ms, 15/5ms 
+o
+Prediction window (number/distance between prediction instances/distance from the last...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116bis</span></div>
+    
+For the AI/ML based CSI prediction, for CSI report, adopt following as a baseline for evaluation purpose
+o
+N4 value: 1, 4
+
+Others can be additionally submitted, e.g., 2, 8
+o
+paramCombination-Doppler-r18: 6,7 or paramCombination -r16 = 5,6 (for Benchmark 1)
+
+Others can be additionally submitted. 
+
+Note: The same selected parameter combination shall be applied for benchmarks.
+o
+CSI report...
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#116bis</span></div>
+    Consider error modelling in TR36.897 Table A.1-2 as a baseline if channel estimation error is modeled.
+-
+Other modelling is not precluded, and companies should report how to model channel estimation error if 
+other modelling is considered.
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#116bis</span></div>
+    If phase discontinuity is modeled, it is modelled as a uniform distribution between 
+ within a time 
+window of , where 
+=40 degrees and 
+=20ms can be a baseline. 
+
+Other modelling is not precluded, and companies should report how to model phase discontinuity if other 
+modelling is considered, and additional 
+.，if adopted
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#116bis</span></div>
+    For the phase discontinuity modelling, it is clarified that
+
+A fixed phase for all CSI-RS observations within the time window, and another fixed phase for the next time 
+window. The phases are according to uniform distribution.
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 7 more decisions at this meeting</p>
+  
+  
+  
+  
+  <h3>#117 (May 2024, Fukuoka, Japan)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#117</span></div>
+    For the  boundary between Type  3 and Type  1 performance  monitoring, the  difference  is whether UE  reports 
+performance metric or performance monitoring output to NW, respectively. 
+-
+The monitoring output is  determined based on performance metric, and additionally, baseline and/or  threshold 
+criterion if configured.
+Observation
+
+
+
+For CSI prediction using UE-sided model, for performance...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#117</span></div>
+    For the evaluation of AI/ML-based CSI prediction using localized models in Release 19, regarding training,
+
+The k-th local model is trained on region #B_k (the k-th local region), 1<=k<=N.
+
+The generalized model is trained on Region #A that may be constructed via any of the following methods that 
+is appropriate for the given generalized/local region modeling approach.
+o
+Region #A is the same...
+  </div>
+  
+  
+  
+  
+  
+  <h3>#118 (Aug 2024, Maastricht, NL)</h3>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#118</span></div>
+    For computational complexity of both AI/ML and non-AI/ML based CSI prediction, to report the number of FLOPs 
+assuming whole bandwidth and one prediction sample.
+Observation (Update of the observation made in RAN1#117)
+•
+For the CSI prediction using UE-sided model, till the RAN1#118 meeting, compared to the Benchmark#1 of the 
+nearest historical CSI, in terms of SGCS, from UE speed perspective,...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118</span></div>
+    From RAN1 perspective, study of CSI prediction has been completed and performance improvement is observed with 
+increased complexity.
+  </div>
+  
+  
+  
+  
+  
+  <h3>#118bis (Oct 2024, Hefei, China)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    For consistency between training and inference, study to identify which potential NW-side additional conditions, if any, 
+may impact on UE assumption for CSI prediction using UE-sided model, resulting non-negligible degradation on model 
+generalization performance. 
+Note: Companies are encouraged to provide generalization performance evaluation on the impact of NW-side additional 
+conditions, if...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    For generalization evaluation to identify potential NW-side additional conditions to ensure consistency between training 
+and inference, consider one or more of the following aspects, if evaluated:
+
+[Optional evaluation] Various tilt angle (e.g., [102] degrees, [110] degrees) 
+
+[Optional evaluation] Various TXRU mapping 
+
+With TXRU virtualization (e.g., for 32 port CSI-RS, [N1, N2, P] = [2, 8,...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    The TP1, TP2 and TP3 to TR38.843 in Section 3 of R1-2409236 are endorsed in principle.
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  <h3>#120 (Feb 2025, Athens, Greece)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    For CSI prediction using UE-side model, at least for inference, Rel-18 CSI framework is reused.
+o
+For CSI-RS resource type for CMR, periodic, semi-persistent, and aperiodic CSI-RS are supported. 
+o
+For inference report, 
+o
+for N4>=1, support Rel-18 codebook ('typeII-Doppler-r18')
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    For CSI prediction using UE-side model, if performance monitoring type 1 or 3 is supported, for calculation of 
+monitoring metric, support 
+-
+Based on intermediate KPI 
+o
+Down select between SGCS and NMSE by RAN1#120bis
+o
+FFS on the definition of SGCS/NMSE and how to calculate monitoring metric
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    For CSI prediction using UE-side model, for CSI processing criteria and timeline, at least for inference further study on
+o
+Whether the CPU should be shared or separately counted between legacy CSI reporting and AI/ML-based 
+CSI reporting
+
+
+
+o
+Whether the Processing Unit should be shared or separately counted among AI/ML related 
+features/functionalities.
+o
+Whether new timeline is needed/updated...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    For CSI prediction using UE-side model, for data collection for training, 
+-
+For resource configuration, 
+o
+For CSI-RS resource type for CMR, periodic and semi-persistent are supported. 
+
+FFS on support of aperiodic CSI-RS resource
+o
+FFS on whether to separately configure CSI-RS resource(s) used for measurements for model input 
+and CSI-RS resource(s) used for measurements for ground-truth...
+  </div>
+  
+  
+  
+  
+
+  
+  <h3>What's Still Open</h3>
+  <ul style="margin:6px 0 6px 20px; font-size:12.5px;">
+    <li>Normative work just started at #120 — whether new spec or Rel-18 framework reuse</li>
+    <li>CSI processing timeline for AI/ML-based prediction</li>
+    <li>Whether NW-side additional conditions require associated ID</li>
+  </ul>
+  <div class="placeholder">Ericsson's N4=4 multi-step prediction increases compute demands significantly. This is where Aerial GPU acceleration becomes compelling for network-side processing.</div>
+
+  
+</div>
+
+
+
+
+<div class="section">
+  <h2>3.4 CSI Compression Deep Dive</h2>
+  <p style="margin-bottom:6px; font-size:12px; color:#666;">
+    54 agreements, 13 conclusions, 1 working assumptions
+  </p>
+
+  
+  
+  <h3>#116 (Feb 2024, Athens, Greece)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    For the evaluation of temporal domain aspects of AI/ML-based CSI compression using two-
+sided model in Release 19, adopt the following categorization for study:
+Case
+Target CSI 
+slot(s)
+Whether the UE uses past CSI 
+information
+Whether the network uses past 
+CSI information
+0
+Present slot
+No
+No
+1
+Present slot
+Yes
+No
+2
+Present slot
+Yes
+Yes
+3
+Future slot(s)
+Yes
+No
+4
+Future slot(s)
+Yes
+Yes
+5
+Present...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    For the evaluation of temporal domain aspects of AI/ML-based CSI compression using two-
+sided model in Release 19, adopt the following as baseline options for UE distribution:
+o
+Option 1: 80% indoor, 20% outdoor
+o
+Option 2: 100% outdoor
+Note: Indoor speed is 3 km/h, outdoor speed is chosen from the following options: 10 km/h, 20 
+km/h, 30 km/h, 60 km/h, 120 km/h. Assumption on O2I car penetration...
+  </div>
+  
+  <div class="agreement-block working-assumption">
+    <div class="block-label type-working-assumption">Working Assumption<span class="block-meeting">#116</span></div>
+    For the evaluation of temporal domain aspects of AI/ML-based CSI compression using two-
+sided model in Release 19, adopt the following benchmark scheme for performance 
+comparison:
+o
+For cases without prediction of future CSI, use the same benchmark scheme assumed in R18 
+AI/ML-based CSI compression study.
+
+
+
+o
+For cases with prediction of future CSI, use the same benchmark scheme assumed in R18...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    For the evaluation of AI/ML-based CSI compression using localized models in Release 19, study 
+the following aspects of the performance/complexity trade-off when comparing the localized 
+model with a benchmark model that is not localized:
+o
+Performance of the localized model that has similar or lower complexity as the benchmark 
+model.
+o
+Model complexity of the localized model that achieves...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    For the evaluation of temporal domain aspects of AI/ML-based CSI compression using two-
+sided model in Release 19, adopt the following evaluation assumptions:
+o
+CSI-RS configuration
+o
+Periodic: 5 ms periodicity (baseline), 20 ms periodicity(encouraged)
+o
+Aperiodic  (for  cases  with  prediction):  Optional,  CSI-RS  burst  with  K  resources  and  time 
+interval m milliseconds (based on R18 MIMO...
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 6 more decisions at this meeting</p>
+  
+  
+  
+  
+  <h3>#116bis (Apr 2024, Changsha, China)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116bis</span></div>
+    For the results template used to collect evaluation results for temporal domain compression Case 1/2/5, adopt Table 1 
+used in Rel-18 as starting point with the following additions:
+
+Temporal domain CSI setting
+o
+CSI feedback periodicity
+o
+CSI-RS periodicity 
+
+Description of model input/output and Case
+o
+Compression case, e.g., Case 1/2/5
+o
+Usage of historical CSI at UE/NW side (e.g., number /...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116bis</span></div>
+    For the results template used to collect evaluation results for temporal domain prediction and compression Case 3/4, 
+adopt Table 1 used in Rel-18 as starting point with the following additions:
+
+Temporal domain CSI setting
+o
+CSI feedback periodicity
+o
+CSI-RS periodicity 
+
+Description of model input/output and use case
+o
+Compression case, e.g., case 3 / 4
+o
+Observation window (usage of...
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#116bis</span></div>
+    For multi-vendor results table, adopt Rel-18 Table 4 for joint training and Rel-18 Table 5 for separate training as 
+starting point, with the same additions of above 2 agreements.
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#116bis</span></div>
+    For model generalization results table, adopt Rel-18 Table 2 and Generalization Case 1 / 2 / 3 as starting point with 
+same additions above. For generalization aspects, adopt the following
+
+Various UE speed
+
+UE distribution
+
+Various CSI-RS periodicity
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#116bis</span></div>
+    For model scalability results table, adopt Rel-18 Table 3 and Generalization Case 1 / 2 / 3 as starting point with same 
+additions above. For generalization aspects, adopt the following
+
+Various numbers of antenna ports
+
+Various frequency granularity
+
+Various payload size
+Conclusion:
+
+Conclude, from RAN1 perspective, that Option 1, if feasible for specification, eliminate the inter-vendor...
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 7 more decisions at this meeting</p>
+  
+  
+  
+  
+  <h3>#117 (May 2024, Fukuoka, Japan)</h3>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#117</span></div>
+    Standardized signalling, if feasible and specified, can be used for parameter / model exchange in option 3a/5a and 3b to 
+alleviate/resolve the inter-vendor training collaboration complexity.
+
+Standardized signalling may be reused for exchanging CSI generation part, CSI reconstruction part, or both, 
+etc, when necessary and feasible.
+
+Standarized signalling may be over-the-air, or other...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#117</span></div>
+    
+For option 3a/3b/4/5a and their sub-options, at least the following potential specification impacts have been 
+identified. Further study the necessity, feasibility, their specification impact.
+
+Exchange
+o
+Parameter / model exchange methods, format/contents, and related spec impacts (3a/3b/5a)
+o
+Dataset exchange methods, format/type/contents of data/dataset, and related spec impacts...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#117</span></div>
+    For option 1 / 3 / 4 / 5 and their sub-options, study mechanisms (e.g., post-deployment performance monitoring) for 
+identifying the cause (e.g., NW side, UE side, data drift) of the performance degradation to guarantee good performance 
+in the field.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#117</span></div>
+    For temporal domain aspects Case 3/4, change the small / medium / large payload region definition as follows:
+Note: X, Y, Z, A, B, and C are feedback overhead rates in bits per time unit of 5ms.
+Note: For  X, Y, and Z, α=[2] for rank=1/2 and α=[4] for rank=4
+Note: For A, B, and C, β=[0.5] for rank=1 and β=[0.75] for rank=2/4
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#117</span></div>
+    For the evaluation of temporal domain aspects of AI/ML-based CSI compression (Cases 1-5), in addition to FLOPs, 
+also consider FLOPs per normalized time unit. Use 5msec as the normalized time unit.
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 5 more decisions at this meeting</p>
+  
+  
+  
+  
+  <h3>#118 (Aug 2024, Maastricht, NL)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118</span></div>
+    For temporal domain aspects of AI/ML-based CSI compression using two-sided model in Release 19, among Cases 1, 
+2, 3, 4, and 5, prioritize further discussion on Case 2 and Case 3.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118</span></div>
+    For studying the standardization of model structure RAN1, RAN1 assumes at least the following:
+
+Precoding matrix as an input (as opposed to raw channel matrix)
+o
+Per-layer processing, with common structure across ranks and layers (corresponding to Option 2-1, 2-
+2, 3-1, or 3-2 for handling rank ≥ 1)
+
+For temporal domain aspects Case 2 and Case 3, strive to reuse the model structure of Case 0...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118</span></div>
+    Continue the study of following directions - on-device operation and UE side offline engineering 
+
+Direction A: Sharing parameters/reference model/dataset that enables UE-side offline engineering (Inter 
+vendor collaboration option 3a/5a/4)
+o
+Potential down-selection into one or more among sub-options 3a/5a-1, 3a/5a-2, 3a/5a-3, 4-1, 4-2, and 
+4-3 considering their feasibility and performance,...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118</span></div>
+    Adopt all the observations in Section 2 of R1-2407499.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118</span></div>
+    For the evaluation of temporal domain aspects of AI/ML-based CSI compression using two-sided model in Release 19, 
+for Case 2, study the performance impact resulting from non-ideal UCI feedback.
+
+Scenario A: no UCI loss
+o
+Note: Corresponds to an upper bound or re-aligning missing historical CSI information
+
+Scenario B: UCI loss, known at NW and unknown at UE, with mitigation at NW
+o
+Note:...
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 1 more decisions at this meeting</p>
+  
+  
+  
+  
+  <h3>#118bis (Oct 2024, Hefei, China)</h3>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#118bis</span></div>
+    For issues listed for inter-vendor collaboration Direction A, conclude the following
+
+Answer to Issue 2: From RAN1 perspective, at least, 
+o
+For option 4-1, there is no proprietary information concern of disclosing encoder input/output from 
+NW side to UE side
+o
+For option 3a-1, there is no proprietary information concern of disclosing encoder parameters from 
+NW side to UE side
+o
+Note: If some...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    For issues listed for inter-vendor collaboration direction B, further study the overhead in Direction B based on the size 
+of the encoder (i.e., number of parameters and quantization level), the number of encoders, and how often the 
+parameters need to be transferred.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    For Directions of addressing inter-vendor collaboration complexity for two-sided CSI compression, 
+
+For Direction A:
+o
+Further study the following options with potential down-selection 
+
+4-1: dataset is {target CSI, CSI feedback}, 
+
+3a-1: encoder parameter exchange, with {target CSI}
+
+Note: Additional information beyond what’s listed above may need to be  exchanged if 
+necessary.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    
+For Direction C:
+o
+It is clarified that, the purpose of a fully specified CSI generation (reconstruction) part is to enable 
+development/training of compatible CSI reconstruction (generation) parts at the NW (UE) side.
+o
+Study  whether  the  fully  specified  reference  models  or  their  compatible  models  may  provide 
+reasonable performance for deployment at NW and UE
+
+Including ...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    For the evaluation studies of Direction A,
+
+For encoder parameter exchange from NW-side to UE-side of 3a-1, 
+
+
+
+o
+Alt. 1: UE-side first trains a nominal decoder
+
+Step 1: UE-side develops a nominal decoder against the exchanged encoder. 
+
+Step 2: UE-side develops actual encoder against the nominal decoder 
+o
+Alt. 2: UE-side directly develops and trains the actual encoder.
+o
+Note: Target CSI is...
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 2 more decisions at this meeting</p>
+  
+  
+  
+  
+  <h3>#119 (Nov 2024, Orlando, US)</h3>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#119</span></div>
+    
+For Direction A 4-1 and 3a-1, send LS to RAN2 for the study of feasibility of parameter / 
+dataset exchange
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#119</span></div>
+    Above LS, additionally CC SA2, SA3, SA5
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#119</span></div>
+    
+For Direction A Option 3a-1 and Direction C, study  the  feasibility  of  scalable  model  structure 
+specification over numbers of Tx ports, CSI feedback payload sizes, and bandwidths, number of slots. 
+o
+Feasibility of Direction A Option 3a-1 is contingent on the feasibility of the scalable model structure 
+specification.
+o
+Feasibility of Direction C is contingent on the feasibility of the...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#119</span></div>
+    For studying the standardized model structure,
+
+For temporal domain Case 0, 
+o
+In  case  of  spatial-frequency  domain  input, adopt  Transformer  as  the  backbone 
+structure.
+o
+Further study angular-frequency and angular-delay domain input
+
+For temporal domain Case 2,
+o
+In case of spatial-frequency domain input, take into account the model structure of 
+Case 0 with an adaptation. Study the...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#119</span></div>
+    For NW to collect data for training, study following spec impacts
+
+Data format: codebook-based Rel-16 eType2 or Rel-18 eType2 for PMI prediction. 
+o
+FFS if enhancement is needed
+o
+FFS number of samples in the report. 
+o
+FFS whether channel or precoder is needed for temporal Cases 3
+
+Configuration of rank/layer, number of subbands
+
+Mechanism for ground-truth reporting
+
+FFS: Report additional...
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 4 more decisions at this meeting</p>
+  
+  
+  
+  
+  <h3>#120 (Feb 2025, Athens, Greece)</h3>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#120</span></div>
+    Under 10% UCI loss,  Case 2 shows small to large performance drop (by Comparing Scenario B and Scenario A). 
+Signaling support to mitigate the UCI loss can improve the performance and helps preserving the gain of Case 2 over 
+Case 0 (by Comparing Scenario C and Scenario A and benchmark schemes).
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    Investigate the following approaches for signaling support for mitigating the impact of UCI loss
+
+NW-signaling to reset of historical CSI information at UE
+
+NW-triggered CSI retransmission
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#120</span></div>
+    For direction A, performance impact, if any, due to NW / UE data distribution mismatch with respect to UE side 
+additional condition can be addressed.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    In Options 3a-1 and 4-1, the exchanged dataset or the model parameters can be associated with an ID for pairing related 
+discussion, then
+
+The same ID can be used for UE to collect UE-side target CSI for UE-side training 
+
+The same ID can be used for applicability inquiry and reporting
+
+The same ID can be used for inference configuration
+
+FFS: whether ID/even same ID is needed for monitoring...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    For inter-vendor-collaboration Options 3a-1 and 4-1 in Direction A, performance target is confirmed as additional 
+information along with the exchanged dataset or the model parameters.
+
+FFS: type of performance metric
+
+FFS: input data for evaluating the performance
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 8 more decisions at this meeting</p>
+  
+  
+  
+
+  
+  <h3>What's Still Open</h3>
+  <ul style="margin:6px 0 6px 20px; font-size:12.5px;">
+    <li>Down-selection between Direction A (parameter exchange), B (direct transfer), C (fully standardized model)</li>
+    <li>Scalable model structure specification feasibility</li>
+    <li>Domain input: spatial-frequency vs angular-delay for Transformer backbone</li>
+    <li>LS to RAN2 pending on signaling feasibility of dataset/parameter exchange</li>
+  </ul>
+  <div class="placeholder">If Direction C (fully standardized reference model) wins, GPU implementations MUST conform to a specific architecture. This is the highest-stakes decision for Aerial's CSI compression support.</div>
+  
+</div>
+
+
+
+
+<div class="section">
+  <h2>3.5 Other Aspects Deep Dive</h2>
+  <p style="margin-bottom:6px; font-size:12px; color:#666;">
+    15 agreements, 12 conclusions, 2 working assumptions
+  </p>
+
+  
+  
+  <h3>#116 (Feb 2024, Athens, Greece)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    
+To facilitate the discussion, RAN1 studies the model identification type A with more details 
+related to use cases.
+
+
+
+
+To facilitate the discussion, RAN1 studies the following options as starting point for model 
+identification type B with more details related to all use cases 
+
+MI-Option 1: Model identification with data collection related configuration(s) and/or indication(s)
+
+MI-Option...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116</span></div>
+    
+Regarding MI-Option 1 (Model identification with data collection related 
+configuration(s) and/or indication(s)) of model identification type B, RAN1 further study the 
+following aspects:
+
+Relationship between model ID and data collection related configuration(s) and/or 
+indication(s) 
+
+Information transmitted from NW to UE (if any) 
+
+Information transmitted from UE to NW (if any)
+
+The...
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#116</span></div>
+    RAN1 has no consensus to reply the SA5 LS (R1-2400035)
+  </div>
+  
+  
+  
+  
+  
+  <h3>#116bis (Apr 2024, Changsha, China)</h3>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#116bis</span></div>
+    From RAN1 perspective, the model transfer/delivery Case z2 is deprioritized at least for UE-sided model in Rel-19 due 
+to the following reasons:
+
+Risk of proprietary design disclosure
+
+Burden of offline cross-vendor collaboration
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#116bis</span></div>
+    From RAN1 perspective, the model transfer/delivery Case z3 is deprioritized for Rel-19 due to the following reasons 
+(compared to Case y):
+
+No much benefit compared to Case y
+
+Risk of proprietary design disclosure
+
+Large burden of offline cross-vendor collaboration
+
+Additional burden on model storage within in 3GPP network
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#116bis</span></div>
+    
+It is clarified that MI-Option 4 refers to the Option 1 of CSI compression
+o
+Option 1: Fully standardized reference model (structure + parameters)
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#116bis</span></div>
+    From RAN1 perspective, for UE-sided model(s) developed (e.g., trained, updated) at UE side, following procedure is an 
+example (noted as AI-Example1) of MI-Option1 for further study (including the feasibility/necessity)
+
+A: For data collection, NW signals the data collection related configuration(s) and it/their associated ID(s) 
+o
+Associated IDs for each sub use case in relation with NW-sided...
+  </div>
+  
+  
+  
+  
+  
+  <h3>#117 (May 2024, Fukuoka, Japan)</h3>
+  
+  <div class="agreement-block working-assumption">
+    <div class="block-label type-working-assumption">Working Assumption<span class="block-meeting">#117</span></div>
+    Regarding the associated ID for Rel-19, the UE assumes that NW-side additional conditions with the same associated 
+ID are consistent at least within a cell  
+
+FFS: whether/how UE assumption can be applicable for multiple cells (including the feasibility study)
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#117</span></div>
+    From RAN1 perspective, for model delivery/transfer Case z4, further study the following 
+alternatives (including the necessity/feasibility/benefits):
+
+Alt. A
+o
+Step A-1: UE reports the supported known model structure(s) to network
+o
+Step A-2:  NW transfers to UE the parameters for one or more of supported known model 
+structure(s) reported in Step A-1
+o
+FFS:  whether  some  additional  step(s), ...
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#117</span></div>
+    From RAN1 perspective, for UE part of two-sided model, further study the following example of MI-Option2 
+(including the feasibility/necessity)
+
+AI-Example2-1
+
+A: A dataset is transferred from the NW/NW-side to UE/UE-side via standardized signaling. 
+o
+Note: RAN1 study of Step A only focuses on RAN1 aspect of the dataset transfer from NW to UE. 
+Other solution for dataset exchange is out of...
+  </div>
+  
+  
+  
+  
+  
+  <h3>#118 (Aug 2024, Maastricht, NL)</h3>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#118</span></div>
+    
+From RAN1 perspective, model identification is at least applicable to some of  inter-
+vendor training collaboration option(s) of CSI compression using two-sided model (if 
+supported)
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#118</span></div>
+    The model identification procedure dedicated to MI-Option5 is not pursued for Rel-19 normative 
+work.
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#118</span></div>
+    The model identification procedure dedicated to MI-Option2 for one-sided model is not pursued 
+for Rel-19 normative work.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118</span></div>
+    Confirm the following Working assumption.
+  </div>
+  
+  <div class="agreement-block working-assumption">
+    <div class="block-label type-working-assumption">Working Assumption<span class="block-meeting">#118</span></div>
+    Regarding the associated ID for Rel-19, the UE assumes that NW-side additional conditions with the same 
+associated ID are consistent at least within a cell  
+
+FFS: whether/how UE assumption can be applicable for multiple cells (including the feasibility study)
+  </div>
+  
+  
+  <p style="font-size:11px; color:#999; margin:4px 0 8px 14px;">... and 4 more decisions at this meeting</p>
+  
+  
+  
+  
+  <h3>#118bis (Oct 2024, Hefei, China)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    Regarding model transfer/delivery Case z4 for inference, further study the following aspects:
+
+Whether/when UE needs the transfer of new parameters for a known model structure.
+
+Whether/when the AI model with the transferred parameters is ready for inference. 
+
+The transfer of partial of the parameters for a known model structure.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    Regarding the study of model transfer/delivery Case z4, for a given known model structure, network can transmit the 
+following information along with the parameters:
+
+a first indication referring to the known model structure at least for the case there are multiple known model 
+structures
+
+a second indication referring to the transmitted parameters 
+
+FFS: relationship of model ID, first...
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#118bis</span></div>
+    From RAN1 perspective, the model transfer/delivery Case z2 is deprioritized for two-sided model in Rel-19.
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#118bis</span></div>
+    Regarding the study of MI-Option2 (i.e., model identification with dataset transfer) for the two-sided model, ID 
+(denoted as ID-X) can be transmitted from network/network-side to UE/UE-side for the dataset.   
+
+Note: The notation “ID-X” is used for discussion purpose
+  </div>
+  
+  
+  
+  
+  
+  <h3>#119 (Nov 2024, Orlando, US)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#119</span></div>
+    For study of MI-Option2 (i.e., model identification with dataset transfer) for the two-sided model, 
+
+ID-X can be used for pairing the UE-part and the NW-part of a two-sided model 
+
+FFS: other information needed for pairing
+  </div>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#119</span></div>
+    Regarding the relationship of model ID, first indication, and second indication for model 
+transfer/delivery Case z4, further study the following options:
+
+Opt.1: model ID consists of the information of the first indication and the second indication
+o
+E.g., model ID is a combination of the first and second indications
+
+Opt.2: The second indication is assumed as the model ID
+
+Opt.3: Model ID is...
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#119</span></div>
+    Regarding MI-Option2 (i.e., model identification with dataset transfer) for the two-sided model, from 
+RAN1 perspective, how to construct the dataset, including whether a dataset constructed from one 
+cell or from multiple cells is up to network implementation.
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#119</span></div>
+    For the study of model delivery/transfer Case z4, if the model delivery/transfer is directly used for 
+inference, the following options are identified as the candidate solutions to determine the readiness 
+of AI model with the transferred parameters for inference (either or combination of the following 
+options)
+
+Option 1: UE sends signaling to network to notify that the AI model with the...
+  </div>
+  
+  
+  
+  
+  
+  <h3>#120 (Feb 2025, Athens, Greece)</h3>
+  
+  <div class="agreement-block ">
+    <div class="block-label type-agreement">Agreement<span class="block-meeting">#120</span></div>
+    From RAN1 perspective, for the study of delivery/transfer Case z4, if the known structured model is specified in 3GPP, 
+at least consider the following for the open format 
+
+Define an open format within 3GPP
+  </div>
+  
+  <div class="agreement-block conclusion">
+    <div class="block-label type-conclusion">Conclusion<span class="block-meeting">#120</span></div>
+    
+From RAN1 perspective, the study progress of model identification and model transfer/delivery in Agenda 
+item 9.1.4.2 are sufficient. 
+o
+New work/discussion in AI 9.1.4.2 can be triggered by LS from other working group(s) or other 
+TSG(s), if any
+o
+The work on pCR (if any) to capture the output of AI 9.1.4.2 to be done in future meeting(s)
+o
+Other on-demand work (if any)
+
+From RAN1...
+  </div>
+  
+  
+  
+  
+
+  
+</div>
+
+
+
+<!-- 4. NOKIA & ERICSSON STRATEGIC MAP -->
+<div class="section">
+  <h2>4. Nokia & Ericsson Strategic Map</h2>
+
+  <h3>4.1 Contribution Volume by Meeting & Topic</h3>
+  <div class="two-col">
+    <div>
+      <h4><span class="badge badge-nokia">Nokia</span> TDoc Contributions</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Meeting</th>
+            <th>BM</th>
+            <th>Pos</th>
+            <th>CSI-P</th>
+            <th>CSI-C</th>
+            <th>Other</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td>#116</td>
+            
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num" style="font-weight:700">5</td>
+          </tr>
+          
+          <tr>
+            <td>#116bis</td>
+            
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num" style="font-weight:700">5</td>
+          </tr>
+          
+          <tr>
+            <td>#117</td>
+            
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num" style="font-weight:700">5</td>
+          </tr>
+          
+          <tr>
+            <td>#118</td>
+            
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num" style="font-weight:700">5</td>
+          </tr>
+          
+          <tr>
+            <td>#118bis</td>
+            
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num" style="font-weight:700">5</td>
+          </tr>
+          
+          <tr>
+            <td>#119</td>
+            
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num" style="font-weight:700">5</td>
+          </tr>
+          
+          <tr>
+            <td>#120</td>
+            
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num" style="font-weight:700">5</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h4><span class="badge badge-ericsson">Ericsson</span> TDoc Contributions</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Meeting</th>
+            <th>BM</th>
+            <th>Pos</th>
+            <th>CSI-P</th>
+            <th>CSI-C</th>
+            <th>Other</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td>#116</td>
+            
+            <td class="num">1</td>
+            <td class="num">5</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num" style="font-weight:700">9</td>
+          </tr>
+          
+          <tr>
+            <td>#116bis</td>
+            
+            <td class="num">1</td>
+            <td class="num">7</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num" style="font-weight:700">11</td>
+          </tr>
+          
+          <tr>
+            <td>#117</td>
+            
+            <td class="num">1</td>
+            <td class="num">7</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num" style="font-weight:700">11</td>
+          </tr>
+          
+          <tr>
+            <td>#118</td>
+            
+            <td class="num">1</td>
+            <td class="num">6</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num" style="font-weight:700">10</td>
+          </tr>
+          
+          <tr>
+            <td>#118bis</td>
+            
+            <td class="num">1</td>
+            <td class="num">6</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num" style="font-weight:700">10</td>
+          </tr>
+          
+          <tr>
+            <td>#119</td>
+            
+            <td class="num">1</td>
+            <td class="num">6</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num">1</td>
+            <td class="num" style="font-weight:700">10</td>
+          </tr>
+          
+          <tr>
+            <td>#120</td>
+            
+            <td class="num">1</td>
+            <td class="num">6</td>
+            <td class="num">1</td>
+            <td class="num">—</td>
+            <td class="num">1</td>
+            <td class="num" style="font-weight:700">9</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3>4.2 Ericsson's Positioning Moderator Role</h3>
+  <div class="strategy-box ericsson">
+    <h4 style="color:#c62828">⚑ Ericsson: Positioning Agenda Driver (All 7 Meetings)</h4>
+    <p style="font-size:12.5px;">Ericsson served as <strong>Moderator</strong> for "Specification support for positioning accuracy enhancement" (agenda 9.1.2) across <em>every</em> meeting from #116 through #120. This means Ericsson:</p>
+    <ul style="margin:6px 0 0 20px; font-size:12.5px;">
+      <li>Drafted all summary documents (FL Summary #0 through #4 at each meeting)</li>
+      <li>Formulated the proposals that became agreements</li>
+      <li>Managed consensus and captured the specification text</li>
+      <li>Also submitted separate technical contributions at every meeting</li>
+    </ul>
+    <p style="font-size:12.5px; margin-top:8px;"><strong>Implication:</strong> Any GPU-accelerated positioning implementation must track Ericsson's moderator summaries closely, as they define the exact spec text.</p>
+  </div>
+
+  <h3>4.3 Nokia vs Ericsson: Key Divergences</h3>
+  <table>
+    <thead>
+      <tr><th>Aspect</th><th><span class="badge badge-nokia">Nokia</span></th><th><span class="badge badge-ericsson">Ericsson</span></th></tr>
+    </thead>
+    <tbody>
+      <tr><td>CSI prediction pre/post processing</td><td>Antenna(port)-delay domain</td><td>Beam-delay domain</td></tr>
+      <tr><td>UE distribution assumption</td><td>100% in-car (vehicular focus)</td><td>100% outdoor + spatial consistency</td></tr>
+      <tr><td>Speed generalization (30→60 km/h)</td><td>-33.6% to -19% degradation</td><td>-11.4% to -2.7% degradation</td></tr>
+      <tr><td>Multi-step prediction (N4=4)</td><td>Not prominently featured</td><td>Heavily featured, strongest advocate</td></tr>
+      <tr><td>Moderator roles in AI 9.1</td><td>None</td><td>Positioning (all meetings)</td></tr>
+      <tr><td>Evaluation result volume</td><td>Moderate, selective scenarios</td><td>Highest among all companies</td></tr>
+      <tr><td>Two-sided model focus</td><td>Yes (paper titles indicate)</td><td>Not specifically emphasized</td></tr>
+      <tr><td>Target deployment scenario</td><td>Vehicular / mobility-focused</td><td>General outdoor deployment</td></tr>
+    </tbody>
+  </table>
+
+  <h3>4.4 The SEP Tension</h3>
+  <p style="font-size:12.5px; margin:6px 0;">
+    A critical pattern: 3GPP standardizes the <em>interfaces</em> (measurements, reports, signaling) but leaves model architecture as implementation-specific for NW-sided and UE-sided models. This means <strong>standardized interfaces wrap proprietary AI</strong> — creating SEP opportunities on the interface layer while the AI itself remains trade-secret competitive advantage. The exception is CSI compression (two-sided models), where the Transformer backbone is being standardized, potentially constraining all implementations including GPU-accelerated ones.
+  </p>
+</div>
+
+<!-- 5. HIGHER LAYER SIGNALING SUMMARY -->
+<div class="section">
+  <h2>5. Higher Layer Signaling Summary</h2>
+  <p style="font-size:12px; color:#666; margin-bottom:10px;">Source: R1-2501143 (RAN1 #120, Qualcomm Rapporteur) — The integration surface for NVIDIA Aerial</p>
+
+  <table class="sig-table">
+    <thead>
+      <tr><th>Mechanism</th><th>Purpose</th><th>Framework</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>CSI-ReportConfig</strong></td><td>Inference configuration for BM (Set A/B, associated ID, monitoring)</td><td>Existing CSI framework, extended</td></tr>
+      <tr><td><strong>Associated ID</strong></td><td>Training/inference consistency bridge</td><td>New parameter within CSI framework</td></tr>
+      <tr><td><strong>OtherConfig</strong></td><td>Enable UAI (UE AI) reporting</td><td>Existing RRC mechanism</td></tr>
+      <tr><td><strong>Applicability Report (Step 4)</strong></td><td>UE reports which AI/ML configs are applicable</td><td>New procedure</td></tr>
+      <tr><td><strong>L1/MAC signaling</strong></td><td>Activation/deactivation of CSI reports</td><td>Existing CSI activation, extended</td></tr>
+      <tr><td><strong>NRPPa</strong></td><td>LMF ↔ gNB signaling for positioning params</td><td>Existing protocol</td></tr>
+      <tr><td><strong>LPP</strong></td><td>LMF ↔ UE assistance data for positioning</td><td>Existing protocol, extended</td></tr>
+      <tr><td><strong>Model Transfer (Case z4)</strong></td><td>Known model structure + parameter transfer OTA</td><td>New mechanism (details FFS)</td></tr>
+      <tr><td><strong>Dataset/Parameter Exchange</strong></td><td>Inter-vendor collaboration for CSI compression</td><td>LS to RAN2 pending</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Beam Management RRC Parameters</h3>
+  <table class="sig-table">
+    <thead><tr><th>Parameter</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>AIML_BM_Case1/Case2 support</td><td>UE Feature</td><td>Capability declaration</td></tr>
+      <tr><td>{Set A, Set B} combination values</td><td>UE Feature</td><td>Per case</td></tr>
+      <tr><td>BM AI/ML Processing capability</td><td>UE Feature</td><td>Compute budget</td></tr>
+      <tr><td>AIML_BM_SetA / AIML_BM_SetB</td><td>RRC (CSI-ReportConfig)</td><td>Enumerated lists with max sizes</td></tr>
+      <tr><td>Enable/Disable per case</td><td>RRC</td><td>Single bit</td></tr>
+      <tr><td>Associated_Inference_Report_ID</td><td>RRC (Monitoring)</td><td>Links monitoring to inference</td></tr>
+      <tr><td>L1MetricforMonitoring</td><td>RRC (Monitoring)</td><td>Performance metric selection</td></tr>
+      <tr><td>nrofReportedRS-v19</td><td>RRC</td><td>Number of reported beams</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Positioning LPP Parameters</h3>
+  <table class="sig-table">
+    <thead><tr><th>Parameter</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>AIML_Pos_Case1 support</td><td>UE Feature</td><td>May be new positioning method family</td></tr>
+      <tr><td>Positioning AI/ML Processing capability</td><td>UE Feature</td><td>Compute budget</td></tr>
+      <tr><td>Assistance Data (common to legacy)</td><td>LPP</td><td>Reuse existing framework</td></tr>
+      <tr><td>Association ID (new AD element)</td><td>LPP</td><td>Training/inference consistency</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 6. THREE INTERVIEW-READY INSIGHTS -->
+<div class="section">
+  <h2>6. Three Interview-Ready Insights for the DevGAM Role</h2>
+
+  <div class="insight-card">
+    <h4>Insight 1: "The standard is creating a GPU-shaped hole in the RAN"</h4>
+    <p>Across 237 decisions over 7 RAN1 sessions, the consistent pattern is: 3GPP standardizes the <em>measurement interfaces</em> and <em>signaling procedures</em> but explicitly leaves model architecture as implementation-specific. NW-sided beam management and positioning models have no standardized architecture — the gNB decides what AI to run. This creates a natural insertion point for NVIDIA Aerial: GPU-accelerated inference behind a standards-compliant signaling interface. The CSI-ReportConfig extensions are the exact L1/L2 API surface that Aerial needs to support.</p>
+  </div>
+
+  <div class="insight-card">
+    <h4>Insight 2: "Ericsson owns positioning; Nokia is the broad-but-quiet participant — and they need different things from NVIDIA"</h4>
+    <p>Ericsson moderated positioning across all 7 meetings, wrote every summary document, and shaped every agreement. They also dominate CSI prediction evaluation results with the strongest N4=4 multi-step numbers. Nokia covers all topics at every meeting but drives no agenda and favors vehicular scenarios (unique 100% in-car UE distribution). For the DevGAM role: <strong>Ericsson needs Aerial to be compute-dense</strong> (their multi-step predictions and positioning control demand heavy inference). <strong>Nokia needs Aerial to be flexible</strong> (their broad-but-differentiated approach means supporting diverse deployment scenarios). Same GPU, different value propositions.</p>
+  </div>
+
+  <div class="insight-card">
+    <h4>Insight 3: "CSI compression is the existential decision — Direction C would constrain every GPU implementation"</h4>
+    <p>The three surviving directions for CSI compression inter-vendor collaboration (A: offline parameter exchange, B: direct transfer, C: fully standardized reference model) have radically different implications for Aerial. <strong>If Direction C wins</strong>, the Transformer backbone already agreed at #119 becomes a <em>mandatory</em> architecture — every GPU implementation must run exactly that model. <strong>If Direction A wins</strong>, vendors keep proprietary models but exchange parameters offline, preserving Aerial's flexibility to optimize. This down-selection, likely happening in the next 2-3 meetings, is the single highest-stakes standards decision for NVIDIA's AI-RAN platform strategy.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="text-align:center; padding:20px; font-size:11px; color:#999;">
+  AI-RAN Standards Intelligence Brief &mdash; Generated from 7 RAN1 session notes (#116&ndash;#120) + R1-2501143 RRC parameters document
+  <br>Prepared for NVIDIA DevGAM interview context
+</div>
+
+</div>
+</body>
+</html>
